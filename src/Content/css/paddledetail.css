@@ -1,0 +1,91 @@
+
+/* Outer container */
+.paddle-detail-sec{
+    min-height: var(--content-min-height);
+    display: flex;
+    flex-direction: column;
+    padding: 0 var(--side-pad);
+    width: 100%;
+}
+
+/* Back arrow */
+.back-div {
+    display: flex;
+    gap: 0.5em;
+    font-size: 1.2rem;
+}
+
+.back-arrow{
+    align-self: center;
+}
+
+.back-text{
+    text-decoration: underline;
+}
+
+/* Inner Container*/
+.paddle-div{
+    margin-top: 1em;
+    flex-grow: 1;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 2em;
+}
+
+.paddle-img-div{
+    flex-shrink: 0;
+    width: 40%;
+    max-width: 380px;
+
+    img{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+}
+
+.paddle-detail-div{
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+}
+
+.tag-div{
+    display: flex;
+    gap: 1em;
+    margin-bottom: 1em;
+    font-size: 1.2rem;
+
+    .paddle-brand{
+        padding: 0.2em 1em;
+        border-radius: 10px;
+    }
+
+    .paddle-type{
+        padding: 0em 1em;
+        border-radius: 10px;
+    }
+}
+
+.paddle-name{
+    font-weight: 800;
+    font-size: 1.8rem;
+}
+
+.paddle-owner{
+    font-size: 1.2rem;
+    margin-bottom: 1em;
+}
+
+.paddle-price{
+    font-size: 1.6rem;
+}
+
+.paddle-desc{
+    margin-top: 1em;
+    margin-bottom: 2em;
+    font-size: 1.1rem;
+}

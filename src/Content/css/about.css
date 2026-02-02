@@ -1,0 +1,58 @@
+/* Banner */
+.about-banner{
+    height: 300px;
+
+    img{
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        object-position: 50% 60%;
+    }
+}
+
+/* Text */
+.about-text-div{
+    display: flex;
+    flex-direction: column;
+    padding: 0 var(--side-pad);
+}
+
+.about-title{
+    font-weight: 800;
+    font-size: 2rem;
+    padding-top: 1em;
+    padding-bottom: 0.9em;
+}
+
+.about-text{
+    font-weight: 6500;
+    font-size: 1.2rem;
+    padding-bottom: 0.5em;
+}
+
+/* Explore */
+.about-explore-div{
+    margin: 2em auto;
+    padding: 3em 4em;
+    width: 80%;
+    max-width: 800px;
+    background-color: var(--card-bg-color);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.about-explore-text{
+    font-weight: 700;
+    font-size: 1.7rem;
+}
+
+.about-highlight-text{
+    color: var(--card-highlight-color);
+}
+
+.about-explore-btn{
+    width: 80%;
+    max-width: 400px;
+    margin-top: 1em;
+}

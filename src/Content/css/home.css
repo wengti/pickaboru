@@ -1,0 +1,52 @@
+
+.home-sec{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 var(--side-pad);
+    background-image: url("/images/pickleball-court.jpg");
+    background-color: var(--main-bg-color);
+    background-position: center;
+    background-size: cover;
+    background-blend-mode: multiply;
+    text-align: center;
+    min-height: var(--content-min-height);
+}
+
+.large-text-grp{
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+}
+
+.large-text,
+.small-text{
+    text-shadow: 1px 1px 10px black;
+}
+
+.large-text{
+    color: whitesmoke;
+    font-size: 3rem;
+    font-weight: 800;
+}
+
+.highlight-text{
+    color: var(--highlight-text-color);
+    font-size: 3rem;
+    font-weight: 800;
+    text-shadow: 1px 1px 4px black;
+}
+
+.small-text{
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-top: 0.2em;
+    margin-bottom: 2em;
+    color: white;
+}
+
+.home-btn{
+    width: 80%;
+    max-width: 500px;
+    margin: 0 auto;
+}

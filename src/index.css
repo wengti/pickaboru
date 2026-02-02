@@ -1,0 +1,92 @@
+/* Variables*/
+:root {
+    /* Color */
+    --main-bg-color: #cad2c5;
+    --dark-bg-color: #2f3e46;
+    --logo-color: #354f52;
+    --highlight-text-color: #399e5a;
+    --btn-bg-color: #7e3f8f;
+    --card-bg-color: #8bbd8b;
+    --card-highlight-color: #7e3f8f;
+
+    /* Header and Footer */
+    --header-height: 100px;
+    --footer-height: 50px;
+    --content-min-height: calc(100vh - var(--header-height) - var(--footer-height));
+    /* Padding */
+    --side-pad: 30px;
+}
+
+/* General */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    background-color: var(--main-bg-color);
+}
+
+main {
+    margin: 0;
+    /* Control the height of the content */
+    min-height: var(--content-min-height);
+    width: 100%;
+}
+
+/* Typography */
+h1 {
+    margin: 0;
+    /* color: green; */
+}
+
+/* Interactive Elements */
+
+a {
+    text-decoration: none;
+    color: black;
+    font-family: inherit;
+}
+
+.btn {
+    display: block;
+    background-color: var(--btn-bg-color);
+    border: 1px solid gray;
+    color: white;
+    padding: 0.8em 1em;
+    border-radius: 10px;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.nav-btn:hover {
+    border-bottom: 3px solid black;
+}
+
+.active-nav-btn {
+    border-bottom: 3px solid black;
+}
+
+/* Paddle components */
+/* Color for different type of paddle */
+.paddle-brand,
+.paddle-type {
+    background-color: #7e3f8f;
+    color: whitesmoke;
+}
+
+.power {
+    background-color: #f8333c;
+}
+
+.control {
+    background-color: #1f487e;
+}
+
+.balanced {
+    background-color: #f89b29;
+}

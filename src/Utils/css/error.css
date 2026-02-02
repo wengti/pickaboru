@@ -1,0 +1,26 @@
+.error-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.isFlexChild{
+    flex-grow: 1;
+}
+
+.isNotFlexChild{
+    min-height: var(--content-min-height);
+}
+
+.error-text{
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+.error-btn{
+    display: block;
+    width: 80%;
+    margin-top: 1em;
+}

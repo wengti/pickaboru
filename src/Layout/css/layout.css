@@ -1,0 +1,45 @@
+/* Header */
+
+header{
+    display: flex;
+    padding: 1em var(--side-pad);
+    justify-content: space-between;
+    align-items: center;
+    height: var(--header-height);
+}
+
+.logo-div{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.logo-img{
+    width: 50px;
+}
+
+.logo-text {
+    font-family: "Lilita One";
+    font-weight: 400;
+    font-size: 3rem;
+    color: var(--logo-color);
+}
+
+/* Nav */
+.header-nav{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1.2rem;
+    font-weight: 700;
+    gap: 2em;
+}
+
+/* Footer */
+footer{
+    background-color: var(--dark-bg-color);
+    padding: 1em var(--side-pad);
+    color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    height: var(--footer-height);
+}

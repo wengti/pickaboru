@@ -1,0 +1,106 @@
+.paddles-sec {
+    margin: 0 var(--side-pad);
+}
+
+.paddles-sec-title {
+    font-weight: 800;
+    font-size: 2rem;
+}
+
+.paddles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* justify-items: center; */
+    margin-top: 1em;
+    margin-bottom: 1em;
+    gap: 1em 1em;
+}
+
+/* Paddles items */
+.paddle-card {
+    width: 100%;
+    height: 550px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(139, 189, 139, 1) 100%);
+    border: 1px solid black;
+    border-radius: 20px;
+    position: relative;
+    color: black;
+}
+
+.paddle-img-container {
+    height: 70%;
+    width: 100%;
+    padding: 3em 2em 0em;
+
+    img {
+        object-fit: cover;
+        object-position: 50% 10%;
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+    }
+}
+
+.paddle-description-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-weight: 600;
+    height: 30%;
+    justify-content: space-between;
+
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top: none;
+
+    .paddle-row-one{
+        display: flex;
+        flex-direction: column;
+        padding-top: 1em;
+    }
+
+    .paddle-row-two{
+        padding-bottom: 1em;
+    }
+
+
+    .paddle-name {
+        font-weight: 800;
+        font-size: 1.5rem;
+    }
+
+    .paddle-owner {
+        margin-top: 0.2em;
+    }
+
+    /* For full details refer to index.css */
+    .paddle-brand,
+    .paddle-type {
+        padding: 0.3em 2em 0.3em 1em;
+        border-top-right-radius: 25px;
+        position: absolute;
+        left: 0;
+    }
+
+    .paddle-type {
+        top: 20px;
+    }
+
+    .paddle-brand {
+        top: 60px;
+    }
+
+    .paddle-price {
+        font-size: 1.4rem;
+        font-weight: 800;
+        margin-top: 0.5em;
+    }
+
+
+
+}
+
+
+.paddle-card:hover {
+    scale: 1.02;
+}

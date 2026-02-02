@@ -1,0 +1,17 @@
+
+1. create filter btn - brand and type
+2. create search function - 
+3. create clear filter btn
+4. if not found items -> set up logic allow to reset search - should retain the filter for reset
+
+1. create user sign in
+2. create user sign up
+3. create user log out
+
+
+
+future to do
+1. figure out how to store user's images
+- how to upload an image
+- how to store the image in supabase
+2. how to clean images into transparent in the backend

@@ -1,0 +1,20 @@
+.not-found-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    min-height: var(--content-min-height);
+    gap: 2em;
+}
+
+.not-found-text{
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+.not-found-btn{
+    display: block;
+    width: 80%;
+    max-width: 800px;
+}
