@@ -79,14 +79,20 @@ a {
     color: whitesmoke;
 }
 
+.power,
+.control,
+.balanced{
+    color: whitesmoke !important;
+}
+
 .power {
-    background-color: #f8333c;
+    background-color: #f8333c !important;
 }
 
 .control {
-    background-color: #1f487e;
+    background-color: #1f487e !important;
 }
 
 .balanced {
-    background-color: #f89b29;
+    background-color: #f89b29 !important;
 }

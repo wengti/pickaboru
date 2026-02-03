@@ -1,14 +1,13 @@
 
-1. create filter btn - brand and type
-2. create search function - 
-3. create clear filter btn
+
 4. if not found items -> set up logic allow to reset search - should retain the filter for reset
 
-1. create user sign in
+1. create user sign into (location and name)
 2. create user sign up
 3. create user log out
 
-
+4. revamp filter (-> include location and user name filter)
+5. paddle condition (represented by star)
 
 future to do
 1. figure out how to store user's images

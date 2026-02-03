@@ -1,5 +1,8 @@
 .paddles-sec {
     margin: 0 var(--side-pad);
+    display: flex;
+    flex-direction: column;
+    min-height: var(--content-min-height);
 }
 
 .paddles-sec-title {
@@ -9,8 +12,8 @@
 
 .paddles-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    /* justify-items: center; */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 350px));
+    justify-content: center;
     margin-top: 1em;
     margin-bottom: 1em;
     gap: 1em 1em;
@@ -20,7 +23,7 @@
 .paddle-card {
     width: 100%;
     height: 550px;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(139, 189, 139, 1) 100%);
+    background: linear-gradient(180deg, #000000 0%, #8bbd8b 100%);
     border: 1px solid black;
     border-radius: 20px;
     position: relative;

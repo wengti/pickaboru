@@ -4,8 +4,15 @@
     justify-content: center;
     text-align: center;
     align-items: center;
-    min-height: var(--content-min-height);
     gap: 2em;
+}
+
+.notFlexChild{
+    min-height: var(--content-min-height);
+}
+
+.isFlexChild{
+    flex-grow: 1;
 }
 
 .not-found-text{

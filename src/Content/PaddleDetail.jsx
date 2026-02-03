@@ -5,8 +5,9 @@ import Loading from '../Utils/Loading'
 import Error from '../Utils/Error'
 import NotFound from '../Utils/NotFound'
 import { useState, useEffect } from 'react'
-import { useParams, NavLink, useNavigate } from 'react-router'
+import { useParams, NavLink, useNavigate, useSearchParams } from 'react-router'
 import { supabase } from '../supabase/supabase-client'
+import { translation } from '../misc/translation'
 import { IoMdArrowRoundBack } from "react-icons/io"
 
 export default function PaddleDetail() {
@@ -83,22 +84,8 @@ export default function PaddleDetail() {
     let displayedElement = ''
     if (hasData) {
 
-        let paddleTypeClass = `paddle-type `
-        let paddleTypeJp = ''
-
-        if (paddle.type === 'Power') {
-            paddleTypeClass += 'power'
-            paddleTypeJp = 'パワー'
-        }
-        else if (paddle.type === 'Control') {
-            paddleTypeClass += 'control'
-            paddleTypeJp = 'コントロール'
-        }
-        else if (paddle.type === 'Balanced') {
-            paddleTypeClass += 'balanced'
-            paddleTypeJp = 'バランス'
-        }
-
+        const paddleTypeClass = `paddle-type ${paddle.type[0].toLowerCase() + paddle.type.slice(1)}` 
+        const paddleTypeJp = translation(paddle.type)
 
         displayedElement = (
             <div className='paddle-div'>
