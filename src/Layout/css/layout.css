@@ -35,6 +35,10 @@ header{
     gap: 2em;
 }
 
+.logout-btn:hover{
+    cursor: pointer;
+}
+
 /* Footer */
 footer{
     background-color: var(--dark-bg-color);

@@ -1,10 +1,11 @@
 
 
-4. if not found items -> set up logic allow to reset search - should retain the filter for reset
+1. learn about protected route (--what i am doing here is bad and not scalable)
+1. display error msg for sign in / sign up
+2. create sign up functionality 
 
-1. create user sign into (location and name)
-2. create user sign up
-3. create user log out
+3. Create Profile
+4. create add paddle form
 
 4. revamp filter (-> include location and user name filter)
 5. paddle condition (represented by star)

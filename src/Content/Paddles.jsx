@@ -8,16 +8,20 @@ import Loading from '../Utils/Loading'
 import Error from '../Utils/Error'
 import NotFound from '../Utils/NotFound'
 import PaddleFilter from '../Component/PaddleFilter'
+import { useAuth } from '../Auth/AuthProvider'
 
 
 export default function Paddles() {
-
+    
     // State
     const [data, setData] = useState(null)
     const [error, setError] = useState(null)
 
     // Search Params
     const [searchParams, setSearchParams] = useSearchParams()
+
+    // useContext
+    const {session} = useAuth()
 
     // Effect
     useEffect(() => {
@@ -134,7 +138,7 @@ export default function Paddles() {
                 <NavLink
                     to={`/paddles/${item.id}`}
                     key={item.id}
-                    state={ [...searchParams.entries()] }
+                    state={[...searchParams.entries()]}
                 >
 
                     <div className='paddle-card'>

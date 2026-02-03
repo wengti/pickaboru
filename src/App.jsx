@@ -7,7 +7,7 @@ import Paddles from './Content/Paddles'
 import PaddleDetail from './Content/PaddleDetail'
 import Signin from './Auth/Signin'
 import Signup from './Auth/Signup'
-
+import Error from "./Utils/Error"
 
 function App() {
 
@@ -16,23 +16,24 @@ function App() {
             path: "/",
             Component: OuterLayout,
             children: [
-                {index: true, Component: Home},
-                {path: "about", Component: About},
-                {path: "paddles", Component: Paddles},
-                {path: "paddles/:id", Component: PaddleDetail},
-                {path: "signin", Component: Signin},
-                {path: "signup", Component: Signup},
-                {path: "*", Component: NotFound}
+                { index: true, Component: Home },
+                { path: "about", Component: About },
+                { path: "paddles", Component: Paddles },
+                { path: "paddles/:id", Component: PaddleDetail },
+                { path: "signin", Component: Signin },
+                { path: "signup", Component: Signup },
+                { path: "error", Component: Error},
+                { path: "*", Component: NotFound }
             ]
         },
-        
-        
+
+
     ]
 
     const router = createBrowserRouter(routes)
 
     return (
-        <RouterProvider router={router}/>
+        <RouterProvider router={router} />
     )
 }
 
