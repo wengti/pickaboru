@@ -134,6 +134,7 @@ export default function Paddles() {
                 <NavLink
                     to={`/paddles/${item.id}`}
                     key={item.id}
+                    state={ [...searchParams.entries()] }
                 >
 
                     <div className='paddle-card'>

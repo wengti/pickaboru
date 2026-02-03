@@ -4,8 +4,8 @@ import "./css/paddledetail.css"
 import Loading from '../Utils/Loading'
 import Error from '../Utils/Error'
 import NotFound from '../Utils/NotFound'
-import { useState, useEffect } from 'react'
-import { useParams, NavLink, useNavigate, useSearchParams } from 'react-router'
+import { useState, useEffect} from 'react'
+import { useParams, NavLink, useNavigate, useLocation} from 'react-router'
 import { supabase } from '../supabase/supabase-client'
 import { translation } from '../misc/translation'
 import { IoMdArrowRoundBack } from "react-icons/io"
@@ -14,13 +14,23 @@ export default function PaddleDetail() {
 
     // State
     const [paddle, setPaddle] = useState(null)
+    const [isFetchAttempted, setIsFetchAttempted] =useState(false)
     const [error, setError] = useState(null)
+
 
     // Params
     const { id } = useParams()
 
     // Navigate
     const navigate = useNavigate()
+
+    // Location / query string
+    const location = useLocation()
+    const backQueryArr = location.state
+    let backQueryStr = ""
+    if (backQueryArr && backQueryArr.length > 0){
+        backQueryStr = "..?" + new URLSearchParams(backQueryArr).toString()
+    }
 
     // Effect
     useEffect(() => {
@@ -32,6 +42,7 @@ export default function PaddleDetail() {
                     throw error
                 }
                 setError(null)
+                setIsFetchAttempted(true)
                 setPaddle(data[0])
             }
             catch (err) {
@@ -41,6 +52,7 @@ export default function PaddleDetail() {
         fetchData()
 
     }, [])
+
 
     // Derived flag form state
     let hasError = false
@@ -54,27 +66,35 @@ export default function PaddleDetail() {
         isLoading = true
     }
     else if(!paddle){
-        // Navigate to Not Found if no data
+        // Navigate to Not Found if no data using the effect below
         hasData = false
-        navigate('/notfound')
-
+        isLoading = true //set to loading meanwhile
     }
     else if (Object.keys(paddle).length > 0) {
         hasData = true
     }
+
+    useEffect( () => {
+        console.log('Has Data?: ', hasData)
+        console.log('Is Loading?: ', isLoading)
+
+        if(!hasData && isLoading && isFetchAttempted){
+            navigate('/notfound')
+        }
+    }, [hasData, isLoading, isFetchAttempted])
 
     
 
     // Back Element
     const backElement = (
         <NavLink
-            to=".."
+            to={ backQueryStr ? backQueryStr : ".."}
             relative="path"
         >
             <div className='back-div'>
                 <IoMdArrowRoundBack className='back-arrow' />
                 <span className='back-text'>
-                    Back to all paddles
+                    { backQueryStr ? "Back to filtered paddles" : "Back to all paddles"}
                 </span>
             </div>
         </NavLink>
@@ -121,5 +141,3 @@ export default function PaddleDetail() {
 
 }
 
-
-// 

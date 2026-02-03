@@ -13,7 +13,8 @@ export default function Home(){
             <span className='small-text'>Rent pickleball paddles from the community and play with confidence before committing.</span>
             <NavLink 
                 className='btn home-btn'
-                to="/paddles">
+                to="/signin"
+            >
                 Get started!
             </NavLink>
         </section>

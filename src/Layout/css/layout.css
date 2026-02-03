@@ -2,10 +2,11 @@
 
 header{
     display: flex;
-    padding: 1em var(--side-pad);
+    padding: 0.5em var(--side-pad) 0em;
     justify-content: space-between;
     align-items: center;
     height: var(--header-height);
+    border-bottom: 1px solid #10451d;
 }
 
 .logo-div{

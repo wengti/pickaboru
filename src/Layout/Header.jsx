@@ -16,6 +16,7 @@ export default function Header(){
             <nav className='header-nav'>
                 <NavLink
                     to="/about"
+                    end
                     className={({isActive}) => isActive ? "nav-btn active-nav-btn" : "nav-btn"}
                 >
                     About
@@ -26,6 +27,14 @@ export default function Header(){
                     className={({isActive}) => isActive ? "nav-btn active-nav-btn" : "nav-btn"}
                 >
                     Paddles
+                </NavLink>
+
+                <NavLink
+                    to="/signin"
+                    end
+                    className={({isActive}) => isActive ? "nav-btn active-nav-btn" : "nav-btn"}
+                >
+                    Signin
                 </NavLink>
             </nav>
         </header>
