@@ -11,7 +11,7 @@
     max-width: 1000px;
     height: 90%;
     display: flex;
-    
+
 }
 
 .img-div {
@@ -68,12 +68,12 @@
     }
 }
 
-.auth-form-btn{
+.auth-form-btn {
     width: 100%;
     margin-top: 1em;
 }
 
-.auth-form-btn:hover{
+.auth-form-btn:hover {
     cursor: pointer;
 }
 
@@ -81,8 +81,28 @@
     margin-top: 1em;
 }
 
-.redirect{
+.redirect {
     color: var(--card-highlight-color);
     font-weight: 800;
     text-decoration: underline;
+}
+
+.error-msg {
+    color: #a81212;
+    text-align: left;
+}
+
+.signup-msg-div {
+    font-size: 1.5rem;
+    font-weight: 800;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5em;
+}
+
+.redirect-btn {
+    display: block;
+    width: 80%;
+    max-width: 800px;
 }

@@ -11,7 +11,7 @@ export default function Header() {
     const [error, setError] = useState(null)
 
     // useAuth
-    const { session, isFetchSessionAttempted } = useAuth()
+    const { session } = useAuth()
 
     // Navigate
     const navigate = useNavigate()
@@ -22,7 +22,7 @@ export default function Header() {
             setError(null)
             navigate('/error')
         }
-    }, [error, session, isFetchSessionAttempted])
+    }, [error])
 
 
     //Function

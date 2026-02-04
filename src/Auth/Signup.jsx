@@ -1,31 +1,70 @@
 import "./css/auth-form.css"
 import { NavLink } from 'react-router'
+import ProtectedRoute from './ProtectedRoute'
+import { useActionState } from 'react'
+import { supabase } from '../supabase/supabase-client'
+import { signupRedirect } from '../global'
 
 export default function Signup() {
 
+    // Form Action State
+    const [status, formAction, isPending] = useActionState(
+
+        async (prevStatus, formData) => {
+            try {
+                const name = formData.get('name')
+                const email = formData.get('email')
+                const password = formData.get('password')
+                const location = formData.get('location')
+
+                const { data, error } = await supabase.auth.signUp({
+                    email,
+                    password,
+                    options: {
+                        emailRedirectTo: signupRedirect,
+                        data: {
+                            name,
+                            location
+                        }
+
+                    }
+                })
+                console.log(error)
+
+                return { data, error }
+
+            }
+            catch (error) {
+                return { data: null, error }
+            }
+
+        },
+        { data: null, error: null }
+    )
+
+    // Elements
     const locationOptions = [
-        "Johor", "Kedah", "Kelantan", "Kuala Lumpur", 
-        "Labuan", "Melaka", "Negeri Sembilan", "Pahang", "Perak", 
-        "Perlis", "Pulau Pinang", "Putrajaya", "Sabah", "Sarawak", 
+        "Johor", "Kedah", "Kelantan", "Kuala Lumpur",
+        "Labuan", "Melaka", "Negeri Sembilan", "Pahang", "Perak",
+        "Perlis", "Pulau Pinang", "Putrajaya", "Sabah", "Sarawak",
         "Selangor", "Terengganu"
     ]
-    const locationOptionsEl = locationOptions.map( option => {
-        return(
-            <option value={option} key={option} selected={option === 'Kuala Lumpur' && true}>
+    const locationOptionsEl = locationOptions.map(option => {
+        return (
+            <option value={option} key={option}>
                 {option}
             </option>
         )
     })
 
-    return (
+    const displayedElement = (
         <div className='auth-sec'>
             <div className='auth-inner-sec'>
-
                 <div className='img-div'>
                     <img src='/images/auth-bg-2.jpg' />
                 </div>
 
-                <form className='auth-form'>
+                <form className='auth-form' action={formAction}>
                     <span className='auth-form-title'>Sign up to join us today!</span>
 
                     <div className='form-input-div'>
@@ -41,6 +80,7 @@ export default function Signup() {
                             name='name'
                             className='form-input'
                             required
+                            disabled={isPending}
                         />
                     </div>
 
@@ -57,6 +97,7 @@ export default function Signup() {
                             name='email'
                             className='form-input'
                             required
+                            disabled={isPending}
                         />
                     </div>
 
@@ -73,6 +114,7 @@ export default function Signup() {
                             name='password'
                             className='form-input'
                             required
+                            disabled={isPending}
                         />
                     </div>
 
@@ -87,7 +129,9 @@ export default function Signup() {
                             id='location'
                             name='location'
                             className='form-input'
+                            defaultValue={'Kuala Lumpur'}
                             required
+                            disabled={isPending}
                         >
                             {locationOptionsEl}
                         </select>
@@ -100,6 +144,13 @@ export default function Signup() {
                         Sign up
                     </button>
 
+                    {
+                        status.error &&
+                        <span className='error-msg'>
+                            {status.error.name}
+                        </span>
+                    }
+
                     <div className='hint'>
                         <span>Already have an account? </span>
                         <NavLink
@@ -111,7 +162,41 @@ export default function Signup() {
                     </div>
                 </form>
             </div>
-
         </div>
     )
+
+    // After sign up before confirming via email
+    // a user is returned, but the session remains null
+    // Confirmation email is limited to 2-4 request per hrs, hence this feature is currently disabled
+    // To enable: https://supabase.com/docs/reference/javascript/auth-signup
+    // Need to specifically mention the redirect email in the signup function too
+    const displayedElementAfterSignUp = (
+        <div className='auth-sec'>
+            <div className='signup-msg-div'>
+                <span>
+                    Please check your email (including junk) to verify your identity.
+                </span>
+                <NavLink
+                    className='btn redirect-btn'
+                    to="/signin"
+                >
+                    Proceed to sign in
+                </NavLink>
+            </div>
+        </div>
+    )
+
+    return (
+        <ProtectedRoute
+            redirectWithSession={true}
+            redirectPath={"/paddles"}
+        >
+            {
+                status?.data?.user && status?.data?.session === null ?
+                    displayedElementAfterSignUp :
+                    displayedElement
+            }
+        </ProtectedRoute>
+    )
 }
+

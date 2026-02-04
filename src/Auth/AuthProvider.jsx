@@ -13,7 +13,6 @@ export default function AuthProvider({ children }) {
     const [error, setError] = useState(null)
     const [session, setSession] = useState(null)
     const [isFetchSessionAttempted, setIsFetchSessionAttempted] = useState(false)
-    console.log('The session object is: ', session)
 
     // Retrive a session
     useEffect( () => {

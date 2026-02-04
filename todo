@@ -1,8 +1,9 @@
 
 
-1. learn about protected route (--what i am doing here is bad and not scalable)
-1. display error msg for sign in / sign up
+
 2. create sign up functionality 
+
+- try if can use verify email
 
 3. Create Profile
 4. create add paddle form

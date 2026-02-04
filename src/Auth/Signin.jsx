@@ -1,54 +1,33 @@
 import "./css/auth-form.css"
 import { NavLink } from 'react-router'
 import { useActionState, useEffect } from 'react'
-import { useNavigate } from 'react-router'
 import { supabase } from '../supabase/supabase-client'
-import { useAuth } from './AuthProvider'
 import Error from '../Utils/Error'
-import Loading from '../Utils/Loading'
-import { FaLinesLeaning } from 'react-icons/fa6'
+import ProtectedRoute from './ProtectedRoute'
 
 export default function Signin() {
 
     // Define form action
-    const [status, formAction, isPending] = useActionState(
-        async (prevStatus, formData) => {
+    const [error, formAction, isPending] = useActionState(
+        async (prevError, formData) => {
             try {
 
                 const email = formData.get('email')
                 const password = formData.get('password')
-        
+                
                 const { data, error } = await supabase.auth.signInWithPassword({ email, password })
                 if (error) {
-                    return {error, submitted: false}
+                    return error
                 }
-                return {error: null, submitted: true}
+                return null
             }
             catch (error) {
-                return {error, submitted: false}
+                return error
             }
 
         },
-        {error: null, submitted: false}
+        null
     )
-
-    // Navigate
-    const navigate = useNavigate()
-
-    // useAuth
-    const {session, isFetchSessionAttempted} = useAuth()
-
-    // Effect
-    useEffect( () => {
-        if((!status.error && status.submitted) || session){
-            navigate("/paddles")
-        }
-    }, [status, session])
-
-    // Derived flag from state
-    let hasSessionAfterFetch = null // Pending state - Show Loading to wait for session to be fetched
-    if(isFetchSessionAttempted && session) hasSessionAfterFetch = true // Redirect - Show Loading so useEffect can redirect afterwards
-    else if(isFetchSessionAttempted && !session) hasSessionAfterFetch = false // Display this page - Confirm that there's no session currently
 
     //Defining elements
     const displayedElement = (
@@ -104,6 +83,14 @@ export default function Signin() {
                         Sign in
                     </button>
 
+                    {
+                        error &&
+                        <span className='error-msg'>
+                            {error.name}
+                        </span>
+                    }
+
+
                     <div className='hint'>
                         <span>Dont have an account yet? </span>
                         <NavLink
@@ -119,12 +106,12 @@ export default function Signin() {
         </div>
     )
 
-
     return (
-        status.error ?
-        <Error error={status.error}/> :
-        (hasSessionAfterFetch === null || hasSessionAfterFetch) ?
-        <Loading /> :
-        displayedElement
+        <ProtectedRoute
+            redirectWithSession={true}
+            redirectPath={"/paddles"}
+        >
+            {displayedElement}
+        </ProtectedRoute>
     )
 }
