@@ -88,7 +88,7 @@
 }
 
 .error-msg {
-    color: #a81212;
+    color: var(--error-color);
     text-align: left;
 }
 

@@ -9,10 +9,16 @@
 }
 
 /* Back arrow */
+.back-div-link{
+    width: fit-content;
+    margin-top: 0.5em;
+}
+
 .back-div {
     display: flex;
     gap: 0.5em;
     font-size: 1.2rem;
+    width: fit-content;
 }
 
 .back-arrow{

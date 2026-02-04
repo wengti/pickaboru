@@ -14,6 +14,10 @@
     min-height: var(--content-min-height);
 }
 
+.isUserChild{
+    flex-grow: 1;
+}
+
 .error-text{
     font-weight: 800;
     font-size: 1.5rem;

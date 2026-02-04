@@ -1,6 +1,11 @@
 
-3. add a welcome msg (so policy needs to be set)
-4. create add paddle form (need to create new table in db)
+1. navigate to the page to see the listed paddles
+1. allow change a listed paddles (if its the owner)
+    - edit
+    - delete
+1. allow me / admin role to be able to 
+    - see all the submitted paddles
+    - edit 
 
 4. revamp filter (-> include location and user name filter)
 5. paddle condition (represented by star)

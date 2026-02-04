@@ -1,0 +1,18 @@
+
+.error-div{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+}
+
+.error-div-top-row{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.logo-img-in-error{
+    width: 80px;
+}

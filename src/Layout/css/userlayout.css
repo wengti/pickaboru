@@ -14,7 +14,9 @@
     font-weight: 600;
     border-right: 2px solid black;
     padding-right: 0.8em;
+    padding-top: 0.5em;
     align-items: flex-end;
+    text-align: right;
     gap: 0.5em;
 }
 

@@ -88,6 +88,7 @@ export default function PaddleDetail() {
     // Back Element
     const backElement = (
         <NavLink
+            className='back-div-link'
             to={ backQueryStr ? backQueryStr : ".."}
             relative="path"
         >

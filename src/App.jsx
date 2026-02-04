@@ -11,6 +11,7 @@ import Error from "./Utils/Error"
 import UserLayout from './Layout/UserLayout'
 import Dashboard from './User/Dashboard'
 import AddPaddle from './User/AddPaddle'
+import YourPaddles from './User/YourPaddles'
 
 function App() {
 
@@ -29,7 +30,8 @@ function App() {
                 {
                     path: "user", Component: UserLayout, children:[
                         { index: true, Component: Dashboard},
-                        { path: "add", Component: AddPaddle}
+                        { path: "add", Component: AddPaddle},
+                        { path: "paddles", Component: YourPaddles}
                     ]
                 },
                 { path: "*", Component: NotFound }

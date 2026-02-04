@@ -1,0 +1,81 @@
+
+.your-paddles-sec{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.your-paddles-sub-div{
+    border-radius: 10px;
+    min-height: 60px;
+    padding: 0.8em 1em;
+    background-color: var(--card-bg-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.sub-div-title{
+    font-size: 1.2rem;
+    font-weight: 700;
+    align-self: flex-start;
+}
+
+.list-paddle-btn {
+    width: fit-content;
+    text-align: center;
+    text-decoration: underline;
+    color: var(--card-highlight-color);
+    font-weight: 600;
+}
+
+.paddle-overview-card{
+    width: 100%;
+    height: 100px;
+    border-radius: 5px;
+    padding: 1em;
+    display: flex;
+    gap: 1em;
+
+    .paddle-overview-img-div{
+        height: 100%;
+        aspect-ratio: 1 /1 ;
+
+        img{
+            height: 100%;
+            width: 100%;
+            object-fit: fill;
+            border-radius: 5px;
+        }
+    }
+
+    .paddle-overview-desc-div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .paddle-overview-title{
+            color: var(--card-highlight-color);
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .paddle-overview-time{
+            opacity: 0.6;
+        }
+    }
+}
+
+.listed{
+    background-color:#a3c2ac ;
+}
+
+.submitted{
+    background-color: #85ad91;
+}
+
+.rejected{
+    background-color: #669975;
+}

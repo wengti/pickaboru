@@ -9,6 +9,7 @@
     --card-bg-color: #8bbd8b;
     --card-highlight-color: #7e3f8f;
     --layout-border-color: #10451d;
+    --error-color: #a81212;
 
     /* Header and Footer */
     --header-height: 75px;
@@ -72,6 +73,10 @@ a {
     text-align: center;
 }
 
+.btn:hover{
+    cursor: pointer;
+}
+
 .nav-btn:hover {
     border-bottom: 3px solid black;
 }
@@ -104,4 +109,10 @@ a {
 
 .balanced {
     background-color: #f89b29 !important;
+}
+
+/* User section */
+.user-child-sec{
+    flex: 1;
+    padding: 1em;
 }

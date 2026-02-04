@@ -1,0 +1,133 @@
+.add-form {
+    display: flex;
+    justify-content: center;
+}
+
+.add-form-outer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--card-bg-color);
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+    border-radius: 15px;
+    padding: 1em 0 1.5em;
+}
+
+.add-form-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--card-highlight-color);
+
+}
+
+.add-form-inner {
+    width: 90%;
+    padding-top: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6em;
+}
+
+.add-form-input-outer-div {
+    width: 80%;
+    border: 2px solid var(--layout-border-color);
+    padding: 0.8em 1.5em 0.8em;
+    margin-bottom: 0.5em;
+    position: relative;
+    border-radius: 10px;
+}
+
+.inpt-div-title {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background-color: var(--card-bg-color);
+    color: var(--card-highlight-color);
+    font-weight: 600;
+}
+
+.detail-sub-div {
+    display: flex;
+    gap: 1em;
+}
+
+.add-form-inpt-div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.1em;
+    
+
+    label {
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    .add-form-inpt {
+        border-radius: 5px;
+        border: none;
+        font-family: inherit;
+        font-size: 1rem;
+        padding: 0.2em 0.2em;
+    }
+
+    .name,
+    .image {
+        width: 100%;
+        margin-bottom: 0.6em;
+    }
+
+    .condition-div{
+        display: flex;
+        justify-content: center;
+        gap: 1.5em;
+        
+
+        input[type='radio']{
+            opacity: 0;
+        }
+
+        .star-el-div{
+            margin-top: 0.8em;
+            position: relative;
+        }
+
+        .star-el{
+            color: var(--card-highlight-color);
+            font-size: 2rem;
+            position: absolute;
+            top: -50%;
+            left: -50%;
+        }
+    }
+
+    .price-div {
+        font-weight: 600;
+    }
+
+    .price {
+        width: 25%;
+        margin: 0 0.5em;
+    }
+
+    .description{
+        resize: none;
+    }
+
+}
+
+.list-btn {
+    width: 80%;
+}
+
+.list-hint{
+    margin-top: -0.5em;
+}
+
+.error-hint{
+    color: var(--error-color)
+}

@@ -6,6 +6,10 @@
     min-height: var(--content-min-height);
 }
 
+.isUserChild {
+    flex: 1;
+}
+
 img {
     width: 200px;
 }

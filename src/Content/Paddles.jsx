@@ -31,6 +31,7 @@ export default function Paddles() {
                 const { data: fetchedData, error } = await supabase
                     .from('items')
                     .select('id, name, owner, type, brand, price, img')
+                    .eq('status', 'listed')
                     .order('id', { ascending: false })
                 if (error) {
                     throw error
