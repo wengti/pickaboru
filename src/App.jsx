@@ -8,6 +8,9 @@ import PaddleDetail from './Content/PaddleDetail'
 import Signin from './Auth/Signin'
 import Signup from './Auth/Signup'
 import Error from "./Utils/Error"
+import UserLayout from './Layout/UserLayout'
+import Dashboard from './User/Dashboard'
+import AddPaddle from './User/AddPaddle'
 
 function App() {
 
@@ -22,7 +25,13 @@ function App() {
                 { path: "paddles/:id", Component: PaddleDetail },
                 { path: "signin", Component: Signin },
                 { path: "signup", Component: Signup },
-                { path: "error", Component: Error},
+                { path: "error", Component: Error },
+                {
+                    path: "user", Component: UserLayout, children:[
+                        { index: true, Component: Dashboard},
+                        { path: "add", Component: AddPaddle}
+                    ]
+                },
                 { path: "*", Component: NotFound }
             ]
         },

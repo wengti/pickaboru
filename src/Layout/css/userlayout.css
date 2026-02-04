@@ -1,0 +1,38 @@
+
+.user-sec {
+    flex: 1;
+    display: flex;
+    padding: 1.5em var(--side-pad);
+    height: 100%;
+}
+
+.user-nav {
+    display: flex;
+    flex-direction: column;
+    width: var(--user-nav-width);
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-right: 2px solid black;
+    padding-right: 0.8em;
+    align-items: flex-end;
+    gap: 0.5em;
+}
+
+.user-nav-btn{
+    cursor: pointer;
+}
+
+.user-nav-btn:hover,
+.logout-div:hover,
+.active-user-nav-btn{
+    color: var(--card-highlight-color)
+}
+
+.logout-div{
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    cursor: pointer;
+}
+

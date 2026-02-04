@@ -1,47 +1,14 @@
 import "../index.css"
 import "./css/layout.css"
-import { NavLink, useNavigate } from 'react-router'
-import { useEffect, useState } from 'react'
-import { supabase } from '../supabase/supabase-client'
+import { NavLink } from 'react-router'
 import { useAuth } from '../Auth/AuthProvider'
+import { FaRegUserCircle } from "react-icons/fa";
 
 export default function Header() {
-
-    // State
-    const [error, setError] = useState(null)
 
     // useAuth
     const { session } = useAuth()
 
-    // Navigate
-    const navigate = useNavigate()
-
-    // Effect
-    useEffect(() => {
-        if (error) {
-            setError(null)
-            navigate('/error')
-        }
-    }, [error])
-
-
-    //Function
-    async function handleLogout() {
-        try {
-
-            // Only allow to logout if there's a logged in session
-            if (session) {
-                const { error } = await supabase.auth.signOut()
-                if (error) {
-                    throw error
-                }
-                navigate('/signin')
-            }
-        }
-        catch (err) {
-            setError(err)
-        }
-    }
 
     // Elements
     const signInEl = (
@@ -53,13 +20,6 @@ export default function Header() {
             Signin
         </NavLink>
     )
-
-    const logOutEl = (
-        <span onClick={() => { handleLogout() }} className='nav-btn logout-btn'>
-            Logout
-        </span>
-    )
-
 
 
     return (
@@ -88,7 +48,15 @@ export default function Header() {
                     Paddles
                 </NavLink>
 
-                { session ? logOutEl : signInEl }
+                {session ?
+                    <NavLink
+                        to ="/user"
+                        className = {({ isActive }) => isActive ? "user-icon active-nav-btn" : "user-icon"}
+                    >
+                        <FaRegUserCircle />
+                    </NavLink> :
+                    signInEl 
+                }
 
             </nav>
         </header>

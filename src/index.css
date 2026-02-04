@@ -8,6 +8,7 @@
     --btn-bg-color: #7e3f8f;
     --card-bg-color: #8bbd8b;
     --card-highlight-color: #7e3f8f;
+    --layout-border-color: #10451d;
 
     /* Header and Footer */
     --header-height: 75px;
@@ -15,6 +16,10 @@
     --content-min-height: calc(100vh - var(--header-height) - var(--footer-height));
     /* Padding */
     --side-pad: 30px;
+
+    /* User */
+    --user-nav-width: 18%;
+    --user-context-width: calc(100%- var(--user-nav-width));
 }
 
 /* General */
@@ -27,12 +32,16 @@ body {
     font-family: Inter, sans-serif;
     font-weight: 500;
     background-color: var(--main-bg-color);
+    display: flex;
+    flex-direction: column;
 }
 
 main {
     margin: 0;
     /* Control the height of the content */
     min-height: var(--content-min-height);
+    display: flex;
+    flex-direction: column;
     width: 100%;
 }
 

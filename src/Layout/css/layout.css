@@ -6,7 +6,7 @@ header{
     justify-content: space-between;
     align-items: center;
     height: var(--header-height);
-    border-bottom: 1px solid #10451d;
+    border-bottom: 1px solid var(--layout-border-color);
 }
 
 .logo-div{
@@ -32,10 +32,16 @@ header{
     justify-content: flex-end;
     font-size: 1.2rem;
     font-weight: 700;
-    gap: 2em;
+    gap: 1.1em;
 }
 
 .logout-btn:hover{
+    cursor: pointer;
+}
+
+.user-icon{
+    align-self: center;
+    font-size: 1.4rem;
     cursor: pointer;
 }
 

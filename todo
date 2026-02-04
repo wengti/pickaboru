@@ -1,12 +1,6 @@
 
-
-
-2. create sign up functionality 
-
-- try if can use verify email
-
-3. Create Profile
-4. create add paddle form
+3. add a welcome msg (so policy needs to be set)
+4. create add paddle form (need to create new table in db)
 
 4. revamp filter (-> include location and user name filter)
 5. paddle condition (represented by star)
