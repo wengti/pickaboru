@@ -79,6 +79,7 @@ export default function Signup() {
                             id='name'
                             name='name'
                             className='form-input'
+                            placeholder='John Doe'
                             required
                             disabled={isPending}
                         />
@@ -96,6 +97,7 @@ export default function Signup() {
                             id='email'
                             name='email'
                             className='form-input'
+                            placeholder='johndoe@email.com'
                             required
                             disabled={isPending}
                         />
@@ -113,6 +115,7 @@ export default function Signup() {
                             id='password'
                             name='password'
                             className='form-input'
+                            placeholder='Aa12@*(/'
                             required
                             disabled={isPending}
                         />
