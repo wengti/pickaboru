@@ -11,7 +11,6 @@ export default function Dashboard() {
     // State
     const [error, setError] = useState(null)
     const [userData, setUserData] = useState(undefined)
-    console.log(userData)
 
     // Auth
     const { session } = useAuth()

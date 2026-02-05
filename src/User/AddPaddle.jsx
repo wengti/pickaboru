@@ -39,10 +39,11 @@ export default function AddPaddle() {
                 if(error){
                     throw error
                 }
-    
+                window.scrollTo(0, document.body.scrollHeight) // scroll to bottom
                 return null
             }
             catch(error){
+                window.scrollTo(0, document.body.scrollHeight) // scroll to bottom
                 return error
             }
         },
@@ -77,7 +78,7 @@ export default function AddPaddle() {
                     name='condition'
                     id={`condition-${idx + 1}`}
                     value={idx + 1}
-                    onChange={(event) => { handleStarChange(event) }}
+                    onClick={(event) => { handleStarChange(event) }}
                     required
                     disabled={isPending}
                 />
