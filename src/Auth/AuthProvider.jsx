@@ -4,6 +4,7 @@ import "./css/authprovider.css"
 import { createContext, useState, useEffect, useContext } from 'react'
 import { supabase } from '../supabase/supabase-client'
 import Error from '../Utils/Error'
+import Loading from '../Utils/Loading'
 
 
 const AuthContext = createContext()
@@ -16,6 +17,7 @@ export default function AuthProvider({ children }) {
 
     const [error, setError] = useState(null)
     const [session, setSession] = useState(undefined)
+    const [user, setUser] = useState(undefined)
     const [isFetchSessionAttempted, setIsFetchSessionAttempted] = useState(false)
 
     // Retrive a session
@@ -62,6 +64,8 @@ export default function AuthProvider({ children }) {
     return (
         error ?
         displayedElementOnError :
+        session === undefined ? 
+        <Loading isAuthLevel={true}/> :
         <AuthContext value={ {session, isFetchSessionAttempted} }>
             {children}
         </AuthContext>

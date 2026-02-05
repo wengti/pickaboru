@@ -6,6 +6,7 @@ import { useAuth } from '../Auth/AuthProvider'
 import { ImExit } from "react-icons/im";
 import ProtectedRoute from '../Auth/ProtectedRoute'
 import Loading from '../Utils/Loading'
+import { useCurrentUser } from '../Auth/CurrentUserProvider'
 
 export default function UserLayout() {
 
@@ -18,6 +19,7 @@ export default function UserLayout() {
 
     // useAuth
     const { session } = useAuth()
+    const { currentUser } = useCurrentUser()
 
     // Effect
     useEffect(() => {
@@ -26,6 +28,8 @@ export default function UserLayout() {
             navigate('/error')
         }
     }, [error])
+
+
 
     //Function
     async function handleLogout() {
@@ -52,6 +56,18 @@ export default function UserLayout() {
         <ProtectedRoute redirectPath='/signin'>
             <section className='user-sec'>
                 <nav className='user-nav'>
+
+                    {
+                        currentUser?.role === 'admin'
+                        &&
+                        <NavLink
+                            to="admin"
+                            end
+                            className={({ isActive }) => isActive ? "active-user-nav-btn user-nav-btn" : "user-nav-btn"}
+                        >
+                            Admin
+                        </NavLink>
+                    }
 
                     <NavLink
                         to=""
@@ -92,7 +108,7 @@ export default function UserLayout() {
 
     return (
         isLoading ?
-        <Loading /> :
-        displayedElement
+            <Loading /> :
+            displayedElement
     )
 }

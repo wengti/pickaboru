@@ -6,6 +6,10 @@
     min-height: var(--content-min-height);
 }
 
+.isAuthLevel{
+    height: 100vh;
+}
+
 .isUserChild {
     flex: 1;
 }

@@ -1,6 +1,6 @@
 
 import "./css/addpaddle.css"
-import { useState, useActionState } from 'react';
+import { useState, useActionState, useEffect } from 'react';
 import { GoStar, GoStarFill } from "react-icons/go";
 import { useAuth } from '../Auth/AuthProvider';
 import { supabase } from '../supabase/supabase-client';
@@ -15,6 +15,11 @@ export default function AddPaddle() {
     // use Auth
     const { session } = useAuth()
 
+    // Effect
+    useEffect( ()=> {
+        window.scrollTo(0,0) // Scroll to top on first render
+    }, [])
+
     // Action State
     const [error, formAction, isPending] = useActionState(
         async (prevError, formData) => {
@@ -28,7 +33,6 @@ export default function AddPaddle() {
                     user_id: session.user.id,
                     status: 'submitted'
                 }
-                console.log(formObject)
     
                 const {error} = await supabase
                     .from('items')

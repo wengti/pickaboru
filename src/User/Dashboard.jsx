@@ -8,6 +8,7 @@ import Loading from '../Utils/Loading'
 
 export default function Dashboard() {
 
+
     // State
     const [error, setError] = useState(null)
     const [userData, setUserData] = useState(undefined)
@@ -32,6 +33,8 @@ export default function Dashboard() {
                 setError(error)
             }
         }
+        
+        window.scrollTo(0,0) // Scroll to top on first render
         fetchUserData()
     }, [])
 

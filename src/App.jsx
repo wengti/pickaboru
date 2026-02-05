@@ -12,6 +12,8 @@ import UserLayout from './Layout/UserLayout'
 import Dashboard from './User/Dashboard'
 import AddPaddle from './User/AddPaddle'
 import YourPaddles from './User/YourPaddles'
+import EditPaddle from './User/EditPaddle'
+import Admin from './User/Admin'
 
 function App() {
 
@@ -31,7 +33,9 @@ function App() {
                     path: "user", Component: UserLayout, children:[
                         { index: true, Component: Dashboard},
                         { path: "add", Component: AddPaddle},
-                        { path: "paddles", Component: YourPaddles}
+                        { path: "edit/:id", Component: EditPaddle},
+                        { path: "paddles", Component: YourPaddles},
+                        { path: "admin", Component: Admin}
                     ]
                 },
                 { path: "*", Component: NotFound }

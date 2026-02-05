@@ -24,6 +24,7 @@ export default function YourPaddles() {
 
     async function fetchPaddlesData() {
         try {
+            setPaddlesData(undefined)
             const { data, error } = await supabase
                 .from('items')
                 .select()
@@ -55,8 +56,23 @@ export default function YourPaddles() {
         }
     }
 
+    async function handleDelete(paddleId) {
+        try {
+            const response = await supabase
+                .from('items')
+                .delete()
+                .eq('id', paddleId)
+
+            await fetchPaddlesData()
+        }
+        catch (error) {
+            setError(error)
+        }
+    }
+
     // Effect
     useEffect(() => {
+        window.scrollTo(0, 0) // Scroll to top on first render
         fetchPaddlesData()
     }, [])
 
@@ -78,20 +94,17 @@ export default function YourPaddles() {
                 paddles.map((paddle) => {
                     const dateObj = new Date(paddle.created_at)
 
-                    let eyeIcon = ""
-                    if (paddle.status === 'listed') {
-                        eyeIcon = (
-                            <div className='icon-inner-div view'>
-                                <NavLink
-                                    to={`/paddles/${paddle.id}`}
-                                    className='paddle-card-icon'
-                                >
-                                    <FaEye />
-                                </NavLink>
-                                <div className='paddle-hint-div view-hint'>View</div>
-                            </div>
-                        )
-                    }
+                    let eyeIcon = (
+                        <div className='icon-inner-div view'>
+                            <NavLink
+                                to={`/paddles/${paddle.id}`}
+                                className='paddle-card-icon'
+                            >
+                                <FaEye />
+                            </NavLink>
+                            <div className='paddle-hint-div view-hint'>View</div>
+                        </div>
+                    )
 
                     let minusIcon = ""
                     if (paddle.status === 'listed') {
@@ -99,7 +112,7 @@ export default function YourPaddles() {
                             <div className='icon-inner-div unlist'>
                                 <IoRemoveCircle
                                     className='paddle-card-icon'
-                                    onClick={() => { updateStatus(paddle.id, 'submitted') }}
+                                    onClick={() => { updateStatus(paddle.id, 'unlisted') }}
                                 />
                                 <div className='paddle-hint-div unlist-hint'>Unllist</div>
                             </div>
@@ -124,7 +137,8 @@ export default function YourPaddles() {
                         editIcon = (
                             <div className='icon-inner-div edit'>
                                 <NavLink
-                                    to={`/`}
+                                    to={`../edit/${paddle.id}`}
+                                    relative='path'
                                     className='paddle-card-icon'
                                 >
                                     <FaEdit />
@@ -135,11 +149,12 @@ export default function YourPaddles() {
                     }
 
                     let delIcon = ""
-                    if (paddle.status === 'rejected') {
+                    if (paddle.status === 'rejected' || paddle.status !== 'submitted') {
                         delIcon = (
                             <div className='icon-inner-div del'>
                                 <AiFillDelete
                                     className='paddle-card-icon'
+                                    onClick={() => { handleDelete(paddle.id) }}
                                 />
                                 <div className='paddle-hint-div del-hint'>Delete</div>
                             </div>
@@ -162,10 +177,10 @@ export default function YourPaddles() {
                             <div className='icon-div'>
 
                                 {paddle.status !== 'submitted' && editIcon}
+                                {eyeIcon}
                                 {paddle.status === 'listed' && minusIcon}
-                                {paddle.status === 'listed' && eyeIcon}
                                 {paddle.status === 'unlisted' && addIcon}
-                                {paddle.status === 'rejected' && delIcon}
+                                {(paddle.status === 'rejected' || paddle.status === 'unlisted') && delIcon}
                             </div>
                         </div>
                     )

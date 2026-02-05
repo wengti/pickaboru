@@ -10,6 +10,8 @@ import { supabase } from '../supabase/supabase-client'
 import { translation } from '../misc/translation'
 import { IoMdArrowRoundBack } from "react-icons/io"
 import handleImgError from '../misc/handleImgError'
+import { useCurrentUser } from '../Auth/CurrentUserProvider'
+import { useAuth } from '../Auth/AuthProvider'
 
 export default function PaddleDetail() {
 
@@ -18,6 +20,9 @@ export default function PaddleDetail() {
     const [isFetchAttempted, setIsFetchAttempted] =useState(false)
     const [error, setError] = useState(null)
 
+    // useCurrentUser
+    const {currentUser} = useCurrentUser()
+    const {session} = useAuth()
 
     // Params
     const { id } = useParams()
@@ -67,8 +72,14 @@ export default function PaddleDetail() {
     else if (paddle === undefined) {
         isLoading = true
     }
-    else if(paddle.length === 0 || paddle[0].status !== 'listed'){
+    else if(
+        paddle.length === 0 ||  // No data is found
+        (
+            (paddle[0]?.status !== 'listed') && (currentUser.role !== 'admin') && (session?.user?.id !== paddle[0]?.user_id)
+        ) // If the item is not listed and you are not admin nor you are the owner, you cannot see it
+    ){
         // Navigate to Not Found if no data using the effect below
+        isLoading = true
         noData = true
     }
     else if (paddle.length > 0) {
