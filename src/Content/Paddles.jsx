@@ -9,6 +9,7 @@ import Error from '../Utils/Error'
 import NotFound from '../Utils/NotFound'
 import PaddleFilter from '../Component/PaddleFilter'
 import { useAuth } from '../Auth/AuthProvider'
+import handleImgError from '../misc/handleImgError'
 
 
 export default function Paddles() {
@@ -144,7 +145,7 @@ export default function Paddles() {
 
                     <div className='paddle-card'>
                         <div className='paddle-img-container'>
-                            <img src={item.img} />
+                            <img src={item.img} onError={(event) => handleImgError(event)}/>
                         </div>
 
                         <div className='paddle-description-container'>

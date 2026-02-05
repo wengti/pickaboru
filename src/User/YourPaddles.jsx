@@ -4,6 +4,7 @@ import { useAuth } from '../Auth/AuthProvider'
 import Loading from '../Utils/Loading'
 import { supabase } from '../supabase/supabase-client'
 import { NavLink } from 'react-router'
+import handleImgError from '../misc/handleImgError'
 
 export default function YourPaddles() {
 
@@ -57,7 +58,7 @@ export default function YourPaddles() {
                         return (
                             <div className={'paddle-overview-card ' + enquiry } key={paddle.id}>
                                 <div className='paddle-overview-img-div' >
-                                    <img src={paddle.img} />
+                                    <img src={paddle.img} onError={(event) => {handleImgError(event)}}/>
                                 </div >
                                 <div className='paddle-overview-desc-div'>
                                     <span className='paddle-overview-title'>

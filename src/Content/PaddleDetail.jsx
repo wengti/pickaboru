@@ -9,6 +9,7 @@ import { useParams, NavLink, useNavigate, useLocation} from 'react-router'
 import { supabase } from '../supabase/supabase-client'
 import { translation } from '../misc/translation'
 import { IoMdArrowRoundBack } from "react-icons/io"
+import handleImgError from '../misc/handleImgError'
 
 export default function PaddleDetail() {
 
@@ -111,7 +112,7 @@ export default function PaddleDetail() {
         displayedElement = (
             <div className='paddle-div'>
                 <div className='paddle-img-div'>
-                    <img src={paddle.img} />
+                    <img src={paddle.img} onError={(event) => {handleImgError(event)}} />
                 </div>
                 <div className='paddle-detail-div'>
                     <div className='tag-div'>
