@@ -14,7 +14,7 @@ import handleImgError from '../misc/handleImgError'
 export default function PaddleDetail() {
 
     // State
-    const [paddle, setPaddle] = useState(null)
+    const [paddle, setPaddle] = useState(undefined)
     const [isFetchAttempted, setIsFetchAttempted] =useState(false)
     const [error, setError] = useState(null)
 
@@ -44,7 +44,7 @@ export default function PaddleDetail() {
                 }
                 setError(null)
                 setIsFetchAttempted(true)
-                setPaddle(data[0])
+                setPaddle(data)
             }
             catch (err) {
                 setError(err)
@@ -58,31 +58,29 @@ export default function PaddleDetail() {
     // Derived flag form state
     let hasError = false
     let isLoading = false
+    let noData = false
     let hasData = false
 
     if(error){
         hasError = true
     }
-    else if (paddle === null) {
+    else if (paddle === undefined) {
         isLoading = true
     }
-    else if(!paddle){
+    else if(paddle.length === 0 || paddle[0].status !== 'listed'){
         // Navigate to Not Found if no data using the effect below
-        hasData = false
-        isLoading = true //set to loading meanwhile
+        noData = true
     }
-    else if (Object.keys(paddle).length > 0) {
+    else if (paddle.length > 0) {
         hasData = true
     }
 
     useEffect( () => {
-        console.log('Has Data?: ', hasData)
-        console.log('Is Loading?: ', isLoading)
 
-        if(!hasData && isLoading && isFetchAttempted){
+        if(noData){
             navigate('/notfound')
         }
-    }, [hasData, isLoading, isFetchAttempted])
+    }, [noData])
 
     
 
@@ -106,23 +104,25 @@ export default function PaddleDetail() {
     let displayedElement = ''
     if (hasData) {
 
-        const paddleTypeClass = `paddle-type ${paddle.type[0].toLowerCase() + paddle.type.slice(1)}` 
-        const paddleTypeJp = translation(paddle.type)
+        let paddleItem = paddle[0]
+
+        const paddleTypeClass = `paddle-type ${paddleItem.type[0].toLowerCase() + paddleItem.type.slice(1)}` 
+        const paddleTypeJp = translation(paddleItem.type)
 
         displayedElement = (
             <div className='paddle-div'>
                 <div className='paddle-img-div'>
-                    <img src={paddle.img} onError={(event) => {handleImgError(event)}} />
+                    <img src={paddleItem.img} onError={(event) => {handleImgError(event)}} />
                 </div>
                 <div className='paddle-detail-div'>
                     <div className='tag-div'>
-                        <span className={paddleTypeClass}>{paddle.type} / {paddleTypeJp}</span>
-                        <span className='paddle-brand'>{paddle.brand}</span>
+                        <span className={paddleTypeClass}>{paddleItem.type} / {paddleTypeJp}</span>
+                        <span className='paddle-brand'>{paddleItem.brand}</span>
                     </div>
-                    <span className='paddle-name'>{paddle.name}</span>
-                    <span className='paddle-owner'>Provided by: {paddle.owner}</span>
-                    <span className='paddle-price'>MYR{paddle.price} per day</span>
-                    <span className='paddle-desc'>{paddle.description}</span>
+                    <span className='paddle-name'>{paddleItem.name}</span>
+                    <span className='paddle-owner'>Provided by: {paddleItem.owner}</span>
+                    <span className='paddle-price'>MYR{paddleItem.price} per day</span>
+                    <span className='paddle-desc'>{paddleItem.description}</span>
                     <NavLink className='btn'>
                         Rent this paddle
                     </NavLink>

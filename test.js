@@ -1,4 +1,2 @@
-const arr =['a','c','d','b']
-
-arr.sort((a,b)=>a.localeCompare(b))
-console.log(arr)
+let a=[]
+console.log(a[0])
