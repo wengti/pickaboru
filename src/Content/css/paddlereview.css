@@ -1,13 +1,76 @@
 /* REVIEW SECTION */
-.review-div{
+.review-div {
+    margin-top: 2em;
     padding-bottom: 2em;
     display: flex;
+    gap: 2em;
+    width: 100%;
 }
 
-.review-summary{
+.review-summary {
     width: 40%;
+    max-width: 380px;
 }
 
-.review-area{
+.rating-icon {
     display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+
+    * {
+        margin-right: 0.2em;
+        color: var(--card-highlight-color);
+    }
+}
+
+.review-area {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.review-comments-title {
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.review-comments {
+    width: 100%;
+    padding-bottom: 1em;
+    border-bottom: 1px solid black;
+}
+
+.reviewer-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 1em;
+}
+
+.reviewer-time{
+    opacity: 0.5;
+    margin-bottom: 0.5em;
+}
+
+.reviewer-rating{
+    font-size: 2rem;
+    color: var(--card-highlight-color)
+}
+
+.reviewer-content {
+    font-size: 1.2rem;
+}
+
+.review-issue-hint,
+.none-review-hint {
+    text-align: center;
+    margin: auto auto;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--card-highlight-color);
+}
+
+.none-review-hint{
+    text-decoration: underline;
+    cursor: pointer;
 }

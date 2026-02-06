@@ -1,0 +1,34 @@
+.calendar-div{
+    position: relative;
+}
+
+.start-date{
+    display: block;
+    width: fit-content;
+    background-color: hsl(287, 39%, 50%);
+    height: 2em;
+    border: 1px dotted black;
+    border-radius: 5px;
+    font-family: inherit;
+    font-weight: 600;
+    color: whitesmoke;
+    display: flex;
+    align-items: center;
+    padding: 0 1em;
+}
+
+.calendar {
+    display: none;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 31px;
+    left: 0;
+}
+
+.start-date:hover .calendar{
+    display: block;
+}
+
+.calendar:hover{
+    display: block;
+}

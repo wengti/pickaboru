@@ -1,16 +1,8 @@
-3. test all added features (write down tested ones on ipad)
-4. test whether the routes are properly protected
-4. revamp filter (-> include location and user name filter)
-5. paddle condition (represented by star)
-6. reset database to assign each paddle to one person
 
-7. start drafting for comments
+1. just do Cash On Demand
+3. implementing transaction page
+4. implementing your order page - allowing user to give review / give hints that its final and not editable
+5. implementing a chart for transaction page
+6. implementing dashboard overview
+7. implementing a chatroom
 
-
-
-
-future to do
-1. figure out how to store user's images
-- how to upload an image
-- how to store the image in supabase
-2. how to clean images into transparent in the backend

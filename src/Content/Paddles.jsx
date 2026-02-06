@@ -39,7 +39,6 @@ export default function Paddles() {
                 if (error) {
                     throw error
                 }
-                console.log(fetchedData)
                 setError(null)
                 setData(fetchedData)
             }

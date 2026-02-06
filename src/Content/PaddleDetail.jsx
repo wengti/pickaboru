@@ -48,7 +48,7 @@ export default function PaddleDetail() {
             try {
                 const { data, error } = await supabase
                     .from('items')
-                    .select('id, name, type, brand, price, img, condition, description, users(name, location)')
+                    .select('id, name, type, brand, price, img, condition, description, users(name, location), orders(date_range)')
                     .eq('id', id)
                 if (error) {
                     throw error
@@ -61,6 +61,7 @@ export default function PaddleDetail() {
                 setError(err)
             }
         }
+        window.scrollTo(0,0)
         fetchData()
 
     }, [])
@@ -124,7 +125,7 @@ export default function PaddleDetail() {
         displayedElement = (
             <>
                 <PaddleDescription paddleItem={paddle[0]}/>
-                <PaddleReview />
+                <PaddleReview paddleId={id}/>
             </>
         )
     }
