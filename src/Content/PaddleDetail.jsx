@@ -4,25 +4,28 @@ import "./css/paddledetail.css"
 import Loading from '../Utils/Loading'
 import Error from '../Utils/Error'
 import NotFound from '../Utils/NotFound'
-import { useState, useEffect} from 'react'
-import { useParams, NavLink, useNavigate, useLocation} from 'react-router'
+import { useState, useEffect } from 'react'
+import { useParams, NavLink, useNavigate, useLocation } from 'react-router'
 import { supabase } from '../supabase/supabase-client'
 import { translation } from '../misc/translation'
 import { IoMdArrowRoundBack } from "react-icons/io"
 import handleImgError from '../misc/handleImgError'
 import { useCurrentUser } from '../Auth/CurrentUserProvider'
 import { useAuth } from '../Auth/AuthProvider'
+import starDisplay from '../misc/starDisplay'
+import PaddleReview from './PaddleReview'
+import PaddleDescription from './PaddleDescription'
 
 export default function PaddleDetail() {
 
     // State
     const [paddle, setPaddle] = useState(undefined)
-    const [isFetchAttempted, setIsFetchAttempted] =useState(false)
+    const [isFetchAttempted, setIsFetchAttempted] = useState(false)
     const [error, setError] = useState(null)
 
     // useCurrentUser
-    const {currentUser} = useCurrentUser()
-    const {session} = useAuth()
+    const { currentUser } = useCurrentUser()
+    const { session } = useAuth()
 
     // Params
     const { id } = useParams()
@@ -34,7 +37,7 @@ export default function PaddleDetail() {
     const location = useLocation()
     const backQueryArr = location.state
     let backQueryStr = ""
-    if (backQueryArr && backQueryArr.length > 0){
+    if (backQueryArr && backQueryArr.length > 0) {
         backQueryStr = "..?" + new URLSearchParams(backQueryArr).toString()
     }
 
@@ -43,7 +46,10 @@ export default function PaddleDetail() {
 
         async function fetchData() {
             try {
-                const { data, error } = await supabase.from('items').select().eq('id', id)
+                const { data, error } = await supabase
+                    .from('items')
+                    .select('id, name, type, brand, price, img, condition, description, users(name, location)')
+                    .eq('id', id)
                 if (error) {
                     throw error
                 }
@@ -66,18 +72,18 @@ export default function PaddleDetail() {
     let noData = false
     let hasData = false
 
-    if(error){
+    if (error) {
         hasError = true
     }
     else if (paddle === undefined) {
         isLoading = true
     }
-    else if(
+    else if (
         paddle.length === 0 ||  // No data is found
         (
             (paddle[0]?.status !== 'listed') && (currentUser.role !== 'admin') && (session?.user?.id !== paddle[0]?.user_id)
         ) // If the item is not listed and you are not admin nor you are the owner, you cannot see it
-    ){
+    ) {
         // Navigate to Not Found if no data using the effect below
         isLoading = true
         noData = true
@@ -86,26 +92,26 @@ export default function PaddleDetail() {
         hasData = true
     }
 
-    useEffect( () => {
+    useEffect(() => {
 
-        if(noData){
+        if (noData) {
             navigate('/notfound')
         }
     }, [noData])
 
-    
+
 
     // Back Element
     const backElement = (
         <NavLink
             className='back-div-link'
-            to={ backQueryStr ? backQueryStr : ".."}
+            to={backQueryStr ? backQueryStr : ".."}
             relative="path"
         >
             <div className='back-div'>
                 <IoMdArrowRoundBack className='back-arrow' />
                 <span className='back-text'>
-                    { backQueryStr ? "Back to filtered paddles" : "Back to all paddles"}
+                    {backQueryStr ? "Back to filtered paddles" : "Back to all paddles"}
                 </span>
             </div>
         </NavLink>
@@ -115,30 +121,11 @@ export default function PaddleDetail() {
     let displayedElement = ''
     if (hasData) {
 
-        let paddleItem = paddle[0]
-
-        const paddleTypeClass = `paddle-type ${paddleItem.type[0].toLowerCase() + paddleItem.type.slice(1)}` 
-        const paddleTypeJp = translation(paddleItem.type)
-
         displayedElement = (
-            <div className='paddle-div'>
-                <div className='paddle-img-div'>
-                    <img src={paddleItem.img} onError={(event) => {handleImgError(event)}} />
-                </div>
-                <div className='paddle-detail-div'>
-                    <div className='tag-div'>
-                        <span className={paddleTypeClass}>{paddleItem.type} / {paddleTypeJp}</span>
-                        <span className='paddle-brand'>{paddleItem.brand}</span>
-                    </div>
-                    <span className='paddle-name'>{paddleItem.name}</span>
-                    <span className='paddle-owner'>Provided by: {paddleItem.owner}</span>
-                    <span className='paddle-price'>MYR{paddleItem.price} per day</span>
-                    <span className='paddle-desc'>{paddleItem.description}</span>
-                    <NavLink className='btn'>
-                        Rent this paddle
-                    </NavLink>
-                </div>
-            </div>
+            <>
+                <PaddleDescription paddleItem={paddle[0]}/>
+                <PaddleReview />
+            </>
         )
     }
 
@@ -146,7 +133,7 @@ export default function PaddleDetail() {
     return (
         <section className='paddle-detail-sec'>
             {backElement}
-            {hasError && <Error error={error} isFlexChild={true}/>}
+            {hasError && <Error error={error} isFlexChild={true} />}
             {isLoading && <Loading />}
             {hasData && displayedElement}
         </section>

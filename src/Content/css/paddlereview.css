@@ -1,0 +1,13 @@
+/* REVIEW SECTION */
+.review-div{
+    padding-bottom: 2em;
+    display: flex;
+}
+
+.review-summary{
+    width: 40%;
+}
+
+.review-area{
+    display: flex;
+}

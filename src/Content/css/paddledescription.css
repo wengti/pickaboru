@@ -1,34 +1,3 @@
-
-/* Outer container */
-.paddle-detail-sec{
-    min-height: var(--content-min-height);
-    display: flex;
-    flex-direction: column;
-    padding: 0 var(--side-pad);
-    width: 100%;
-}
-
-/* Back arrow */
-.back-div-link{
-    width: fit-content;
-    margin-top: 0.5em;
-}
-
-.back-div {
-    display: flex;
-    gap: 0.5em;
-    font-size: 1.2rem;
-    width: fit-content;
-}
-
-.back-arrow{
-    align-self: center;
-}
-
-.back-text{
-    text-decoration: underline;
-}
-
 /* Inner Container*/
 .paddle-div{
     margin-top: 1em;
@@ -108,12 +77,3 @@
     font-size: 1.1rem;
 }
 
-/* REVIEW SECTION */
-.review-div{
-    padding-bottom: 2em;
-    display: flex;
-}
-
-.review-summary{
-    width: 40%;
-}
