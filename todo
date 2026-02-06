@@ -1,12 +1,13 @@
-1. allow change a listed paddles (if its the owner)
-    - edit (button on top right)
-    - delete (button on top right)
-1. allow me / admin role to be able to (on a separate div)
-    - see all the submitted paddles 
-    - edit 
-
+3. test all added features (write down tested ones on ipad)
+4. test whether the routes are properly protected
 4. revamp filter (-> include location and user name filter)
 5. paddle condition (represented by star)
+6. reset database to assign each paddle to one person
+
+7. start drafting for comments
+
+
+
 
 future to do
 1. figure out how to store user's images

@@ -10,6 +10,8 @@ import NotFound from '../Utils/NotFound'
 import PaddleFilter from '../Component/PaddleFilter'
 import { useAuth } from '../Auth/AuthProvider'
 import handleImgError from '../misc/handleImgError'
+import { useCurrentUser } from '../Auth/CurrentUserProvider'
+import starDisplay from '../misc/starDisplay'
 
 
 export default function Paddles() {
@@ -22,7 +24,7 @@ export default function Paddles() {
     const [searchParams, setSearchParams] = useSearchParams()
 
     // useContext
-    const {session} = useAuth()
+    const {currentUser} = useCurrentUser()
 
     // Effect
     useEffect(() => {
@@ -31,12 +33,13 @@ export default function Paddles() {
             try {
                 const { data: fetchedData, error } = await supabase
                     .from('items')
-                    .select('id, name, owner, type, brand, price, img')
+                    .select('id, name, type, brand, price, img, condition, users(name, location)')
                     .eq('status', 'listed')
                     .order('id', { ascending: false })
                 if (error) {
                     throw error
                 }
+                console.log(fetchedData)
                 setError(null)
                 setData(fetchedData)
             }
@@ -79,7 +82,7 @@ export default function Paddles() {
             filteredData = filteredData.filter((item) => {
                 return (
                     item.name.toLowerCase().includes(searchTerm) ||
-                    item.owner.toLowerCase().includes(searchTerm) ||
+                    item.users.name.toLowerCase().includes(searchTerm) ||
                     item.type.toLowerCase().includes(searchTerm) ||
                     item.brand.toLowerCase().includes(searchTerm)
                 )
@@ -117,6 +120,16 @@ export default function Paddles() {
                 }
             }
 
+            if (searchParams.get('sortCondition')) {
+                const sortConditionVal = searchParams.get('sortCondition')
+                if (sortConditionVal === 'true') {
+                    sortedData.sort((a, b) => a.condition - b.condition)
+                }
+                else if (sortConditionVal === 'false') {
+                    sortedData.sort((a, b) => b.condition - a.condition)
+                }
+            }
+
             displayedData = sortedData
         }
     }
@@ -151,9 +164,11 @@ export default function Paddles() {
                         <div className='paddle-description-container'>
                             <div className='paddle-row-one'>
                                 <span className="paddle-name">{item.name}</span>
-                                <span className='paddle-owner'>Provided by: {item.owner}</span>
+                                <span className='paddle-owner'>{item.users.name}, {item.users.location}</span>
                             </div>
+                            
                             <div className='paddle-row-two'>
+                                <div className='star-row'>{starDisplay(item.condition)}</div>
                                 <span className='paddle-price'>MYR {item.price} / day</span>
                             </div>
                             <span className={paddleTypeClass}>{item.type} / {paddleTypeJp}</span>
@@ -167,7 +182,7 @@ export default function Paddles() {
         // Configure the overall grid to be displayed
         displayedElement = (
             <section className='paddles-sec'>
-                <span className='paddles-sec-title'>Explore the options!</span>
+                <span className='paddles-sec-title'>Welcome{currentUser && `, ${currentUser.name}`}! ようこそ! </span>
                 <PaddleFilter
                     types={paddleTypes}
                     searchParams={searchParams}

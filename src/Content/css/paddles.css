@@ -8,6 +8,7 @@
 .paddles-sec-title {
     font-weight: 800;
     font-size: 2rem;
+    color: var(--logo-color);
 }
 
 .paddles-grid {
@@ -27,11 +28,11 @@
     border: 1px solid black;
     border-radius: 20px;
     position: relative;
-    color: black;
+    color: #5d2f6a;
 }
 
 .paddle-img-container {
-    height: 70%;
+    height: 65%;
     width: 100%;
     padding: 3em 2em 0em;
 
@@ -49,8 +50,8 @@
     flex-direction: column;
     text-align: center;
     font-weight: 600;
-    height: 30%;
-    justify-content: space-between;
+    height: 35%;
+    /* justify-content: space-between; */
 
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -63,7 +64,16 @@
     }
 
     .paddle-row-two{
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         padding-bottom: 1em;
+
+        .star-row{
+            margin-bottom: 0.5em;
+            font-size: 1.2em;
+        }
     }
 
 
@@ -74,6 +84,8 @@
 
     .paddle-owner {
         margin-top: 0.2em;
+        color: black;
+        font-size: 1rem;
     }
 
     /* For full details refer to index.css */
@@ -96,7 +108,6 @@
     .paddle-price {
         font-size: 1.4rem;
         font-weight: 800;
-        margin-top: 0.5em;
     }
 
 

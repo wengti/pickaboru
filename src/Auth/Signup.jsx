@@ -45,8 +45,8 @@ export default function Signup() {
     // Elements
     const locationOptions = [
         "Johor", "Kedah", "Kelantan", "Kuala Lumpur",
-        "Labuan", "Melaka", "Negeri Sembilan", "Pahang", "Perak",
-        "Perlis", "Pulau Pinang", "Putrajaya", "Sabah", "Sarawak",
+        "Labuan", "Melaka", "Negeri Sembilan", "Pahang", , "Penang", "Perak",
+        "Perlis", "Putrajaya", "Sabah", "Sarawak",
         "Selangor", "Terengganu"
     ]
     const locationOptionsEl = locationOptions.map(option => {

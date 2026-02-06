@@ -197,3 +197,9 @@
     color: var(--error-color);
     font-size: 0.9rem;
 }
+
+.rejected-reason {
+    color: var(--error-color);
+    margin-top: 0.2em;
+    font-size: 0.9rem;
+}

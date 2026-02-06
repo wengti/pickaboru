@@ -89,6 +89,30 @@ export default function PaddleFilter({ types, searchParams, setSearchParams }) {
         }
     }
 
+    function handleSortCondition() {
+
+        const sortConditionVal = searchParams.get('sortCondition')
+
+        if (sortConditionVal === 'true') {
+            setSearchParams((sp) => {
+                sp.set('sortCondition', 'false')
+                return sp
+            })
+        }
+        else if (sortConditionVal === 'false'){
+            setSearchParams((sp) => {
+                sp.delete('sortCondition')
+                return sp
+            })
+        }
+        else {
+            setSearchParams((sp) => {
+                sp.set('sortCondition', 'true')
+                return sp
+            })
+        }
+    }
+
     function handleClear() {
         setSearchParams({})
     }
@@ -106,6 +130,13 @@ export default function PaddleFilter({ types, searchParams, setSearchParams }) {
     if (searchParams.get('sortPrice') === 'true' || searchParams.get('sortPrice') === 'false') {
         isPriceSortedAsc = searchParams.get('sortPrice')
         sortPriceActiveClass = 'active-sort'
+    }
+
+    let isConditionSortedAsc = null
+    let sortConditionActiveClass = ''
+    if (searchParams.get('sortCondition') === 'true' || searchParams.get('sortCondition') === 'false') {
+        isConditionSortedAsc = searchParams.get('sortCondition')
+        sortConditionActiveClass = 'active-sort'
     }
 
 
@@ -173,6 +204,23 @@ export default function PaddleFilter({ types, searchParams, setSearchParams }) {
         </div>
     )
 
+    const sortConditionBtn = (
+        <div
+            className={`sort-btn ${sortConditionActiveClass}`}
+            onClick={() => { handleSortCondition() }}
+        >
+            {
+                isConditionSortedAsc === null
+                    ? <TiArrowUnsorted />
+                    : isConditionSortedAsc === 'true'
+                        ? <BsSortNumericDown />
+                        : <BsSortNumericUp />
+            }
+
+            Condition
+        </div>
+    )
+
     const clearBtn = (
         <span
             className='clear-btn'
@@ -193,6 +241,7 @@ export default function PaddleFilter({ types, searchParams, setSearchParams }) {
                 <span className='search-group-title'>Sort by: </span>
                 {sortNameBtn}
                 {sortPriceBtn}
+                {sortConditionBtn}
             </div>
             {searchFilters}
             {clearBtn}

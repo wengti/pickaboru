@@ -173,6 +173,12 @@ export default function YourPaddles() {
                                 <span className='paddle-overview-time'>
                                     Created at {dateObj.toLocaleString()}
                                 </span>
+                                {
+                                    paddle.status === 'rejected' && 
+                                    <span className='rejected-reason'>
+                                        Feedback: {paddle.feedback}
+                                    </span>
+                                }
                             </div>
                             <div className='icon-div'>
 
