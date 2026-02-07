@@ -34,6 +34,10 @@ export function getDateRangeForSupabase([startDate, endDate]){
 
 }
 
+export function getDuration([startDate, endDate]){
+    return ((getDateAtMidnight(endDate) - getDateAtMidnight(startDate)) / (1000 * 60 * 60 * 24) + 1)
+}
+
 export default function noop(){
 
 }

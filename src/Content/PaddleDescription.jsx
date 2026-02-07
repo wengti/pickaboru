@@ -7,7 +7,7 @@ import { NavLink, useNavigate } from 'react-router'
 import { supabase } from '../supabase/supabase-client'
 import DatePicker from './DatePicker'
 import { useState } from 'react'
-import { getDateRangeForSupabase } from '../misc/handleDate'
+import { getDateRangeForSupabase, getDuration } from '../misc/handleDate'
 import { useCurrentUser } from '../Auth/CurrentUserProvider'
 
 // check if its a user
@@ -40,6 +40,7 @@ export default function PaddleDescription({ paddleItem }) {
                 buyer_id: currentUser.id,
                 seller_id: paddleItem.user_id,
                 date_range: getDateRangeForSupabase(dateValue),
+                values: getDuration(dateValue) * paddleItem.price,
                 is_reviewed: false
             }
             
