@@ -21,6 +21,19 @@ export function parseDateRangeAtMidnight(dateRangeStr){
     return [getDateAtMidnight(start), getDateAtMidnight(exclusiveEndDate)]
 }
 
+export function getDateRangeForSupabase([startDate, endDate]){
+
+    // start date needs to +8hrs because because difference between malaysia time and iso is 8hrs
+    // without this, start date will be converted as ytd
+    const startDateStr = new Date(new Date(startDate).setHours(8)).toISOString().split('T')[0]  
+    const endDateStr = new Date(endDate).toISOString().split('T')[0]
+
+    console.log("endDate: ", startDate)
+    console.log("ToISOString: ", new Date(endDate).toISOString())
+    return `[${startDateStr}, ${endDateStr}]`
+
+}
+
 export default function noop(){
 
 }

@@ -48,7 +48,7 @@ export default function PaddleDetail() {
             try {
                 const { data, error } = await supabase
                     .from('items')
-                    .select('id, name, type, brand, price, img, condition, description, users(name, location), orders(date_range)')
+                    .select('*, users(name, location), orders(date_range)')
                     .eq('id', id)
                 if (error) {
                     throw error
@@ -82,7 +82,7 @@ export default function PaddleDetail() {
     else if (
         paddle.length === 0 ||  // No data is found
         (
-            (paddle[0]?.status !== 'listed') && (currentUser.role !== 'admin') && (session?.user?.id !== paddle[0]?.user_id)
+            (session?.user?.role !== "authenticated")
         ) // If the item is not listed and you are not admin nor you are the owner, you cannot see it
     ) {
         // Navigate to Not Found if no data using the effect below

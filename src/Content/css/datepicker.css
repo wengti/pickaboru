@@ -23,6 +23,7 @@
     position: absolute;
     bottom: 31px;
     left: 0;
+    color: black;
 }
 
 .start-date:hover .calendar{

@@ -168,7 +168,7 @@ export default function YourPaddles() {
                             </div >
                             <div className='paddle-overview-desc-div'>
                                 <span className='paddle-overview-title'>
-                                    {paddle.name}
+                                    {paddle.brand} {paddle.name}
                                 </span>
                                 <span className='paddle-overview-time'>
                                     Created at {dateObj.toLocaleString()}

@@ -3,12 +3,14 @@ import "./css/paddledescription.css"
 import starDisplay from '../misc/starDisplay'
 import handleImgError from '../misc/handleImgError'
 import { translation } from '../misc/translation'
-import { NavLink } from 'react-router'
+import { NavLink, useNavigate } from 'react-router'
 import { supabase } from '../supabase/supabase-client'
 import DatePicker from './DatePicker'
 import { useState } from 'react'
-import getDateAtMidnight from '../misc/handleDate'
+import { getDateRangeForSupabase } from '../misc/handleDate'
+import { useCurrentUser } from '../Auth/CurrentUserProvider'
 
+// check if its a user
 
 
 export default function PaddleDescription({ paddleItem }) {
@@ -18,14 +20,43 @@ export default function PaddleDescription({ paddleItem }) {
     tomorrow.setDate(tomorrow.getDate() + 1)
 
     const [dateValue, setDateValue] = useState([tomorrow, tomorrow])
-    const [error, setError] = useState([null])
+    const [error, setError] = useState(null)
+
+    // session
+    const { currentUser } = useCurrentUser()
+
+    // navigate
+    const navigate = useNavigate()
 
     async function handleRent() {
         try {
+
+            if (currentUser === null){
+                throw {name: "Invalid credentials", message: "Please sign in first."}
+            }
             
+            const rentEntry = {
+                paddle_id: paddleItem.id,
+                buyer_id: currentUser.id,
+                seller_id: paddleItem.user_id,
+                date_range: getDateRangeForSupabase(dateValue),
+                is_reviewed: false
+            }
+            
+            const {error} = await supabase
+                .from('orders')
+                .insert(rentEntry)
+
+            if(error){
+                console.log(error)
+                throw error
+            }
+            navigate('/user/orders')
+
         }
         catch (error) {
-            setError(error) 
+            console.log(error)
+            setError(error)
         }
     }
 
@@ -52,9 +83,18 @@ export default function PaddleDescription({ paddleItem }) {
                 <span className='paddle-desc'>{paddleItem.description}</span>
 
                 <DatePicker dateState={{ dateValue, setDateValue }} paddleItem={paddleItem} />
-                <button className='btn rent-btn' onClick={() => { handleRent() }}>
-                    Rent this paddle
-                </button>
+                {paddleItem.status === 'listed' ?
+                    <button className='btn rent-btn' onClick={() => { handleRent() }}>
+                        Rent this paddle
+                    </button> :
+                    <button className='btn rent-btn not-available-btn' disabled>
+                        Currently Not Available
+                    </button> 
+                }
+                {
+                    error &&
+                    <span className='rent-error'>{error.name || error.details}: {error.message}</span>
+                }
             </div>
         </div>
     )

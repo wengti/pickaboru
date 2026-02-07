@@ -187,6 +187,10 @@
             background-color: var(--btn-bg-color);
         }
 
+        .expanded{
+            height: 100%;
+        }
+        
         .feedback-reject-btn{
             background-color: var(--error-color);
         }

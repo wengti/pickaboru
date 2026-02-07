@@ -90,3 +90,11 @@
     margin-top: 0.5em;
 }
 
+.rent-error{
+    color: var(--error-color)
+}
+
+.not-available-btn {
+    background-color: gray;
+    cursor: not-allowed !important;
+}
