@@ -9,29 +9,29 @@ import Loading from '../Utils/Loading'
 import Error from '../Utils/Error'
 import { FaEye } from "react-icons/fa"
 import ReviewForm from './ReviewForm'
+import { SdCardAlertOutlined } from '@mui/icons-material'
 
-export default function YourOrders() {
-
+export default function YourSales() {
     //state
-    const [ordersData, setOrdersData] = useState(undefined)
+    const [salesData, setSalesData] = useState(undefined)
     const [error, setError] = useState(null)
 
     // current user
     const { currentUser } = useCurrentUser()
 
     // Function
-    async function fetchOrdersData() {
+    async function fetchSalesData() {
         try {
-            setOrdersData(undefined)
+            setSalesData(undefined)
             const { data, error } = await supabase
                 .from('orders')
                 .select(`
-                    *,
-                    paddle_data: items(*), 
-                    seller_data: users!orders_seller_id_fkey(name)
-                    `
-                ) // paddle and seller are both an object
-                .eq('buyer_id', currentUser?.id)
+                        *,
+                        paddle_data: items(*), 
+                        buyer_data: users!orders_buyer_id_fkey(name)
+                        `
+                ) // paddle and buyer are both an object
+                .eq('seller_id', currentUser?.id)
                 .order('date_range', { ascending: false })
             if (error) {
                 throw error
@@ -39,7 +39,7 @@ export default function YourOrders() {
 
 
             setError(null)
-            setOrdersData(data)
+            setSalesData(data)
         }
         catch (error) {
             setError(error)
@@ -50,34 +50,34 @@ export default function YourOrders() {
     // Effect
     useEffect(() => {
         window.scrollTo(0, 0)
-        fetchOrdersData()
+        fetchSalesData()
     }, [])
 
     // Element
     let displayedElement = ""
-    if (ordersData) {
+    if (salesData) {
 
         // Separate filter based on date
         const today = getDateAtMidnight(new Date())
-        const ongoingOrders = []
-        const pastOrders = []
-        const futureOrders = []
-        ordersData.forEach((order, idx) => {
-            const [orderStartDate, orderEndDate] = parseDateRangeAtMidnight(order?.date_range)
-            if (today >= orderStartDate && today <= orderEndDate) { ongoingOrders.push(order) }
-            else if (today > orderEndDate) { pastOrders.push(order) }
-            else if (today < orderStartDate) { futureOrders.push(order) }
+        const ongoingSales = []
+        const pastSales = []
+        const futureSales = []
+        salesData.forEach((sale, idx) => {
+            const [saleStartDate, saleEndDate] = parseDateRangeAtMidnight(sale?.date_range)
+            if (today >= saleStartDate && today <= saleEndDate) { ongoingSales.push(sale) }
+            else if (today > saleEndDate) { pastSales.push(sale) }
+            else if (today < saleStartDate) { futureSales.push(sale) }
         })
 
 
         // Function to show a whole section
-        function showPaddles(orders, title, isCompleted = false) {
+        function showPaddles(sales, title, isCompleted = false) {
 
-            let orderCard = (
-                orders.map((order) => {
-                    const { paddle_data: paddle, seller_data: seller } = order
+            let saleCard = (
+                sales.map((sale) => {
+                    const { paddle_data: paddle, buyer_data: buyer} = sale
 
-                    const [startDate, endDate] = parseDateRangeAtMidnight(order.date_range)
+                    const [startDate, endDate] = parseDateRangeAtMidnight(sale.date_range)
                     const formattedStartDate = startDate.toLocaleString('en-GB', { dateStyle: 'medium' })
                     const formattedEndDate = endDate.toLocaleString('en-GB', { dateStyle: 'medium' })
 
@@ -94,7 +94,7 @@ export default function YourOrders() {
                     )
 
                     return (
-                        <div key={order.id} className='admin-inner-div'>
+                        <div key={sale.id} className='admin-inner-div'>
                             <div className={'paddle-overview-card submitted'}>
                                 <div className='paddle-overview-img-div' >
                                     <img src={paddle.img} onError={(event) => { handleImgError(event) }} />
@@ -104,18 +104,16 @@ export default function YourOrders() {
                                         {paddle.brand} {paddle.name}
                                     </span>
                                     <span className='sales-made'>
-                                        Spend: MYR {order.values}
+                                        Sales made: MYR {sale.values}
                                     </span>
                                     <span className='paddle-overview-time'>
-                                        Owned by {seller.name} <br /> Rented from {formattedStartDate} to {formattedEndDate}
+                                        Booked by {buyer.name} <br /> Rented from {formattedStartDate} to {formattedEndDate}
                                     </span>
                                 </div>
                                 <div className='icon-div'>
                                     {eyeIcon}
                                 </div>
                             </div>
-
-                            {(isCompleted && order.is_reviewed === false) && <ReviewForm paddle={paddle} order={order}/>}
 
                         </div>
                     )
@@ -124,8 +122,8 @@ export default function YourOrders() {
 
 
             const paddlesEl = (
-                orders.length > 0 ?
-                    orderCard :
+                sales.length > 0 ?
+                    saleCard :
                     <NavLink
                         className="list-paddle-btn"
                         to="../add"
@@ -148,9 +146,9 @@ export default function YourOrders() {
 
         displayedElement = (
             <section className="user-child-sec your-paddles-sec">
-                {showPaddles(futureOrders, "Orders to be fulfilled")}
-                {showPaddles(pastOrders, "Completed order", true)}
-                {showPaddles(ongoingOrders, "Ongoing orders")}
+                {showPaddles(futureSales, "Sales to be completed")}
+                {showPaddles(pastSales, "Completed sales")}
+                {showPaddles(ongoingSales, "Ongoing sales")}
             </section>
         )
     }
@@ -158,9 +156,8 @@ export default function YourOrders() {
     return (
         error ?
             <Error error={error} isUserChild={true} /> :
-            ordersData === undefined ?
+            salesData === undefined ?
                 <Loading isUserChild={true} /> :
                 displayedElement
     )
-
 }

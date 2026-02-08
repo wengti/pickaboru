@@ -1,11 +1,10 @@
-
-.your-paddles-sec{
+.your-paddles-sec {
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
 
-.your-paddles-sub-div{
+.your-paddles-sub-div {
     border-radius: 10px;
     min-height: 60px;
     padding: 0.8em 1em;
@@ -17,7 +16,7 @@
     gap: 1em;
 }
 
-.sub-div-title{
+.sub-div-title {
     font-size: 1.2rem;
     font-weight: 700;
     align-self: flex-start;
@@ -31,7 +30,7 @@
     font-weight: 600;
 }
 
-.paddle-overview-card{
+.paddle-overview-card {
     width: 100%;
     height: 120px;
     border-radius: 5px;
@@ -39,11 +38,11 @@
     display: flex;
     gap: 1em;
 
-    .paddle-overview-img-div{
+    .paddle-overview-img-div {
         height: 100%;
-        aspect-ratio: 1 /1 ;
+        aspect-ratio: 1 /1;
 
-        img{
+        img {
             height: 100%;
             width: 100%;
             object-fit: fill;
@@ -51,40 +50,40 @@
         }
     }
 
-    .paddle-overview-desc-div{
+    .paddle-overview-desc-div {
         display: flex;
         flex-direction: column;
         justify-content: center;
         flex: 1;
 
-        .paddle-overview-title{
+        .paddle-overview-title {
             color: var(--card-highlight-color);
             font-weight: 700;
             font-size: 1.3rem;
         }
 
-        .paddle-overview-time{
+        .paddle-overview-time {
             margin-top: 0.3em;
             opacity: 0.6;
         }
     }
 
-    .icon-div{
+    .icon-div {
         display: flex;
         gap: 0.5em;
         font-size: 1rem;
 
-        .icon-inner-div{
+        .icon-inner-div {
             position: relative;
             height: fit-content;
         }
 
-        .paddle-card-icon:hover{
+        .paddle-card-icon:hover {
             color: var(--card-highlight-color);
             cursor: pointer;
         }
 
-        .paddle-hint-div{
+        .paddle-hint-div {
             display: none;
             position: absolute;
             top: -15px !important;
@@ -100,58 +99,63 @@
         .unlist:hover .unlist-hint,
         .submit:hover .submit-hint,
         .edit:hover .edit-hint,
-        .del:hover .del-hint
-        {
+        .del:hover .del-hint {
             display: block;
         }
     }
+
+    .sales-made {
+        color: hsl(287, 39%, 40%);
+        font-size: 1rem;
+        font-weight: 600;
+    }
 }
 
-.listed{
-    background-color:#a3c2ac ;
+.listed {
+    background-color: #a3c2ac;
 }
 
-.submitted{
+.submitted {
     background-color: #85ad91;
 }
 
-.unlisted{
+.unlisted {
     background-color: #75a383;
 }
 
-.rejected{
+.rejected {
     background-color: #5c8a6a;
 }
 
-.admin-inner-div{
+.admin-inner-div {
     width: 100%;
     gap: 0.5em;
     display: flex;
     flex-direction: column;
 }
 
-.feedback-form{
+.feedback-form {
     width: 100%;
-    
+
 }
 
-.feedback-title{
-        display: block;
-        width: fit-content;
-        background-color: #a3c2ac;
-        padding: 0.2em 1em 0.2em 0.5em;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-        font-weight: 600;
-        border-bottom: 1px dotted black;
+.feedback-title {
+    display: block;
+    width: fit-content;
+    background-color: #a3c2ac;
+    padding: 0.2em 1em 0.2em 0.5em;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-weight: 600;
+    border-bottom: 1px dotted black;
 }
 
-.feedback-div{
+.feedback-div {
     width: 100%;
     display: flex;
     gap: 0.5em;
 
-    textarea{
+    textarea {
         width: 80%;
         resize: none;
         background-color: #c2d6c8;
@@ -162,10 +166,10 @@
         padding: 0.4em 0.4em;
     }
 
-    .feedback-btn-div{
+    .feedback-btn-div {
         width: 20%;
 
-        button{
+        button {
             width: 100%;
             border: none;
             font-family: inherit;
@@ -174,24 +178,24 @@
             border-radius: 5px;
         }
 
-        button:hover{
+        button:hover {
             cursor: pointer;
         }
 
-        button:active{
+        button:active {
             background-color: #c2d6c8;
             color: black;
         }
 
-        .feedback-list-btn{
+        .feedback-list-btn {
             background-color: var(--btn-bg-color);
         }
 
-        .expanded{
+        .expanded {
             height: 100%;
         }
-        
-        .feedback-reject-btn{
+
+        .feedback-reject-btn {
             background-color: var(--error-color);
         }
     }

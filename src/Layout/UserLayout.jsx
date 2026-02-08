@@ -78,6 +78,13 @@ export default function UserLayout() {
                     </NavLink>
 
                     <NavLink
+                        to="add"
+                        className={({ isActive }) => isActive ? "active-user-nav-btn user-nav-btn" : "user-nav-btn"}
+                    >
+                        Add A Paddle
+                    </NavLink>
+
+                    <NavLink
                         to="paddles"
                         className={({ isActive }) => isActive ? "active-user-nav-btn user-nav-btn" : "user-nav-btn"}
                     >
@@ -92,11 +99,12 @@ export default function UserLayout() {
                     </NavLink>
 
                     <NavLink
-                        to="add"
+                        to="sales"
                         className={({ isActive }) => isActive ? "active-user-nav-btn user-nav-btn" : "user-nav-btn"}
                     >
-                        Add A Paddle
+                        Your Sales
                     </NavLink>
+
 
                     <div
                         className='logout-div'

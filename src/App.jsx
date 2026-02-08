@@ -15,6 +15,7 @@ import YourPaddles from './User/YourPaddles'
 import EditPaddle from './User/EditPaddle'
 import Admin from './User/Admin'
 import YourOrders from './User/YourOrders'
+import YourSales from './User/YourSales'
 
 function App() {
 
@@ -37,7 +38,8 @@ function App() {
                         { path: "edit/:id", Component: EditPaddle},
                         { path: "paddles", Component: YourPaddles},
                         { path: "admin", Component: Admin},
-                        { path: "orders", Component: YourOrders}
+                        { path: "orders", Component: YourOrders},
+                        { path: "sales", Component: YourSales}
                     ]
                 },
                 { path: "*", Component: NotFound }

@@ -27,8 +27,11 @@ export default function YourPaddles() {
             setPaddlesData(undefined)
             const { data, error } = await supabase
                 .from('items')
-                .select()
+                .select(
+                    '*, orders(values)'
+                )
                 .eq('user_id', session?.user?.id)
+
             if (error) {
                 throw error
             }
@@ -161,6 +164,8 @@ export default function YourPaddles() {
                         )
                     }
 
+                    let salesMade = paddle.orders.reduce((accumulator, currentOrder) => accumulator + currentOrder.values, 0)
+
                     return (
                         <div className={'paddle-overview-card ' + enquiry} key={paddle.id}>
                             <div className='paddle-overview-img-div' >
@@ -169,6 +174,9 @@ export default function YourPaddles() {
                             <div className='paddle-overview-desc-div'>
                                 <span className='paddle-overview-title'>
                                     {paddle.brand} {paddle.name}
+                                </span>
+                                <span className='sales-made'>
+                                    {salesMade > 0 ? `Sales made: MYR ${salesMade}` : null}
                                 </span>
                                 <span className='paddle-overview-time'>
                                     Created at {dateObj.toLocaleString()}
