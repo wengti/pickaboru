@@ -23,6 +23,7 @@ export default function PaddleReview({ paddleId }) {
                     .from('reviews')
                     .select('*, users(name)')
                     .eq('paddle_id', paddleId)
+                    .order('created_at', {ascending: false})
 
                 
                 if (error) {
