@@ -1,0 +1,33 @@
+.dashboard-welcome {
+    margin-bottom: 1em;
+}
+
+.charts-rows {
+    margin: 1em 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.chart-row {
+    background-color: var(--card-bg-color);
+    border-radius: 10px;
+    padding: 1em;
+}
+
+.chart-inner-row{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    padding: 0.5em;
+    justify-content: center;
+}
+
+.chart-row-title {
+    font-size: 1.5rem;
+    margin-top: 1em;
+    color: var(--card-highlight-color);
+    font-weight: 700;
+}

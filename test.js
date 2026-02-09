@@ -1,7 +1,9 @@
-let a = {}
+const today = new Date()
+const curMonth = today.getMonth()
+console.log(curMonth)
 
-a[1] = 5
-console.log(a)
+const pastDay = new Date("2025-12-24")
+const pastMonth = pastDay.getMonth()
+console.log(pastMonth)
 
-delete a[1]
-console.log(a)
+console.log(curMonth - pastMonth)

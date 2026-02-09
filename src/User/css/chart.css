@@ -1,0 +1,60 @@
+.chart-area {
+    background-color: var(--card-bg-color);
+    display: block;
+    border-radius: 10px;
+    padding: 1em;
+
+
+    .chart-title {
+        font-size: 1.5rem;
+        margin-top: 1em;
+        color: var(--card-highlight-color);
+        font-weight: 700;
+    }
+}
+
+.chart-summary {
+    display: flex;
+    justify-content: space-around;
+
+    .chart-box {
+        width: 45%;
+        height: 80px;
+        background-color: #aed0ae;
+        border-radius: 20px;
+        padding: 0.5em 1em;
+        display: flex;
+        flex-direction: column;
+        gap: 0em;
+
+        .chart-summary-title {
+            font-size: 1rem;
+            opacity: 0.6;
+        }
+
+        .chart-summary-text {
+            font-size: 2rem;
+            font-weight: 700;
+            align-self: center;
+        }
+    }
+
+    .chart-box:hover{
+        transform: scale(1.1);
+    }
+
+    .chart-link{
+        text-decoration: underline;
+        align-self: center;
+    }
+
+    .orders {
+        color: var(--card-highlight-color);
+    }
+
+    .sales {
+        color: #399e5a;
+    }
+
+
+}

@@ -94,8 +94,8 @@ export default function ReviewForm({ paddle, order }) {
                     maxLength="100"
                     placeholder="i.e. I love the experience..."
                     onChange={(event) => { setReviewText(event.target.value) }}
+                    value = {reviewText}
                 >
-                    {reviewText}
                 </textarea>
                 <div className='feedback-btn-div'>
                     <button className='feedback-list-btn expanded' onClick={() => { handleReview() }}>Add</button>
