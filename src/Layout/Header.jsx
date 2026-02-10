@@ -3,6 +3,7 @@ import "./css/layout.css"
 import { NavLink } from 'react-router'
 import { useAuth } from '../Auth/AuthProvider'
 import { FaRegUserCircle } from "react-icons/fa";
+import { FaRegMessage } from "react-icons/fa6";
 
 export default function Header() {
 
@@ -48,14 +49,24 @@ export default function Header() {
                     Paddles
                 </NavLink>
 
+                {
+                    session &&
+                    <NavLink
+                        to="/chat"
+                        className={({ isActive }) => isActive ? "msg-icon active-nav-btn" : "msg-icon"}
+                    >
+                        <FaRegMessage />
+                    </NavLink>
+                }
+
                 {session ?
                     <NavLink
-                        to ="/user"
-                        className = {({ isActive }) => isActive ? "user-icon active-nav-btn" : "user-icon"}
+                        to="/user"
+                        className={({ isActive }) => isActive ? "user-icon active-nav-btn" : "user-icon"}
                     >
                         <FaRegUserCircle />
                     </NavLink> :
-                    signInEl 
+                    signInEl
                 }
 
             </nav>

@@ -4,10 +4,11 @@ import { useEffect, useState, useRef } from 'react'
 import { useCurrentUser } from '../Auth/CurrentUserProvider'
 import { supabase } from '../supabase/supabase-client'
 import { getDateAtMidnight, parseDateRangeAtMidnight } from '../misc/handleDate'
-import { NavLink } from 'react-router'
+import { NavLink, useNavigate } from 'react-router'
 import Loading from '../Utils/Loading'
 import Error from '../Utils/Error'
 import { FaEye } from "react-icons/fa"
+import { IoChatboxEllipses } from "react-icons/io5";
 import ReviewForm from './ReviewForm'
 
 export default function YourOrders() {
@@ -18,6 +19,9 @@ export default function YourOrders() {
 
     // current user
     const { currentUser } = useCurrentUser()
+
+    // navigate
+    const navigate = useNavigate()
 
     // Function
     async function fetchOrdersData() {
@@ -40,6 +44,26 @@ export default function YourOrders() {
 
             setError(null)
             setOrdersData(data)
+        }
+        catch (error) {
+            setError(error)
+        }
+    }
+
+    async function handleChat(order) {
+        try {
+            if (!order.has_chatroom) {
+                const { error } = await supabase
+                    .from('orders')
+                    .update({ has_chatroom: true })
+                    .eq('id', order.id)
+    
+                if (error) {
+                    throw (error)
+                }
+            }
+
+            navigate(`/chat/${order.id}`)
         }
         catch (error) {
             setError(error)
@@ -93,6 +117,18 @@ export default function YourOrders() {
                         </div>
                     )
 
+                    let chatIcon = (
+                        <div className='icon-inner-div view'>
+                            <div
+                                onClick={() => { handleChat(order) }}
+                                className='paddle-card-icon'
+                            >
+                                <IoChatboxEllipses />
+                            </div>
+                            <div className='paddle-hint-div view-hint'>Chat</div>
+                        </div>
+                    )
+
                     return (
                         <div key={order.id} className='admin-inner-div'>
                             <div className={'paddle-overview-card submitted'}>
@@ -111,11 +147,12 @@ export default function YourOrders() {
                                     </span>
                                 </div>
                                 <div className='icon-div'>
+                                    {chatIcon}
                                     {eyeIcon}
                                 </div>
                             </div>
 
-                            {(isCompleted && order.is_reviewed === false) && <ReviewForm paddle={paddle} order={order}/>}
+                            {(isCompleted && order.is_reviewed === false) && <ReviewForm paddle={paddle} order={order} />}
 
                         </div>
                     )

@@ -41,8 +41,19 @@ header{
 
 .user-icon{
     align-self: center;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     cursor: pointer;
+}
+
+.msg-icon{
+    align-self: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.user-icon:hover,
+.msg-icon:hover {
+    border-bottom: 3px solid black;
 }
 
 /* Footer */

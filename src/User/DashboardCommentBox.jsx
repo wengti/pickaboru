@@ -4,7 +4,6 @@ import "./css/dashboardcommentbox.css"
 import { heartDisplay } from '../misc/starDisplay';
 
 export default function DashboardCommentBox({ reviewObj, title }) {
-    console.log(reviewObj)
     const { items: paddle, reviews, buyer_data } = reviewObj
     const review = reviews[0]
     return (

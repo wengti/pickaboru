@@ -16,6 +16,9 @@ import EditPaddle from './User/EditPaddle'
 import Admin from './User/Admin'
 import YourOrders from './User/YourOrders'
 import YourSales from './User/YourSales'
+import ChatLayout from './Layout/ChatLayout'
+import ChatRoom from './Chat/ChatRoom'
+import ChatIndex from './Chat/ChatIndex'
 
 function App() {
 
@@ -40,6 +43,12 @@ function App() {
                         { path: "admin", Component: Admin},
                         { path: "orders", Component: YourOrders},
                         { path: "sales", Component: YourSales}
+                    ]
+                },
+                {
+                    path: "chat", Component: ChatLayout, children: [
+                        {index: true, Component: ChatIndex},
+                        {path: ":orderId", Component: ChatRoom}
                     ]
                 },
                 { path: "*", Component: NotFound }

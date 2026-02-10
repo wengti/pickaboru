@@ -1,0 +1,131 @@
+.chatbox-outer-div {
+    height: var(--content-min-height);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 1em 0;
+}
+
+.chat-container {
+    min-width: 550px;
+    width: 80%;
+    max-width: 900px;
+    height: 100%;
+    background-color: var(--card-bg-color);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #10451d;
+}
+
+.chat-top-banner {
+    background-color: #10451d;
+    height: 40px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding-left: 1em;
+    color: whitesmoke;
+    font-weight: 700;
+}
+
+.chat-box {
+    flex: 1;
+    overflow: auto;
+    scrollbar-color: #e5e9e2 var(--main-bg-color);
+    scrollbar-width: thin;
+
+    .message-box {
+        margin: 1em;
+        padding: 0.5em 1em;
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+        max-width: 60%;
+        color: whitesmoke;
+        position: relative;
+        border-radius: 4px;
+    }
+
+    .sender {
+        margin-left: auto;
+        background-color: #6d367c;
+    }
+
+    .arrow-right {
+        position: absolute;
+        bottom: 0;
+        right: -7px;
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 10px solid #6d367c;
+    }
+
+
+    .receiver {
+        margin-right: auto;
+        background-color: #417141;
+    }
+
+    .arrow-left {
+        position: absolute;
+        bottom: 0;
+        left: -7px;
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-right: 10px solid #417141;
+    }
+
+    .message-date {
+        opacity: 0.65;
+        margin-top: 0.3em;
+        font-size: 0.8rem;
+    }
+
+    .right {
+        text-align: end;
+    }
+
+    .left {
+        text-align: start;
+    }
+}
+
+.chat-entry {
+    height: 80px;
+    display: flex;
+
+
+    .message-area {
+        height: 100%;
+        resize: none;
+        width: 90%;
+        border-bottom-left-radius: 10px;
+        font-family: inherit;
+        padding: 5px;
+        border: none;
+        background-color: hsl(287, 39%, 95%);
+    }
+
+    .send-btn {
+        flex: 1;
+        border: none;
+        border-bottom-right-radius: 10px;
+        font-size: 1.25rem;
+        background-color: var(--card-highlight-color);
+        color: whitesmoke;
+        cursor: pointer;
+    }
+
+    .send-btn:hover .send-icon {
+        transform: scale(1.1);
+    }
+}
+

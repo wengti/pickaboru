@@ -4,12 +4,12 @@ import { useEffect, useState, useRef } from 'react'
 import { useCurrentUser } from '../Auth/CurrentUserProvider'
 import { supabase } from '../supabase/supabase-client'
 import { getDateAtMidnight, parseDateRangeAtMidnight } from '../misc/handleDate'
-import { NavLink } from 'react-router'
+import { NavLink, useNavigate } from 'react-router'
 import Loading from '../Utils/Loading'
 import Error from '../Utils/Error'
 import { FaEye } from "react-icons/fa"
 import ReviewForm from './ReviewForm'
-import { SdCardAlertOutlined } from '@mui/icons-material'
+import { IoChatboxEllipses } from "react-icons/io5";
 
 export default function YourSales() {
     //state
@@ -18,6 +18,9 @@ export default function YourSales() {
 
     // current user
     const { currentUser } = useCurrentUser()
+
+     // navigate
+    const navigate = useNavigate()
 
     // Function
     async function fetchSalesData() {
@@ -40,6 +43,26 @@ export default function YourSales() {
 
             setError(null)
             setSalesData(data)
+        }
+        catch (error) {
+            setError(error)
+        }
+    }
+
+    async function handleChat(order) {
+        try {
+            if (!order.has_chatroom) {
+                const { error } = await supabase
+                    .from('orders')
+                    .update({ has_chatroom: true })
+                    .eq('id', order.id)
+
+                if (error) {
+                    throw (error)
+                }
+            }
+
+            navigate(`/chat/${order.id}`)
         }
         catch (error) {
             setError(error)
@@ -75,7 +98,7 @@ export default function YourSales() {
 
             let saleCard = (
                 sales.map((sale) => {
-                    const { paddle_data: paddle, buyer_data: buyer} = sale
+                    const { paddle_data: paddle, buyer_data: buyer } = sale
 
                     const [startDate, endDate] = parseDateRangeAtMidnight(sale.date_range)
                     const formattedStartDate = startDate.toLocaleString('en-GB', { dateStyle: 'medium' })
@@ -90,6 +113,18 @@ export default function YourSales() {
                                 <FaEye />
                             </NavLink>
                             <div className='paddle-hint-div view-hint'>View</div>
+                        </div>
+                    )
+
+                    let chatIcon = (
+                        <div className='icon-inner-div view'>
+                            <div
+                                onClick={() => { handleChat(sale) }}
+                                className='paddle-card-icon'
+                            >
+                                <IoChatboxEllipses />
+                            </div>
+                            <div className='paddle-hint-div view-hint'>Chat</div>
                         </div>
                     )
 
@@ -111,6 +146,7 @@ export default function YourSales() {
                                     </span>
                                 </div>
                                 <div className='icon-div'>
+                                    {chatIcon}
                                     {eyeIcon}
                                 </div>
                             </div>
