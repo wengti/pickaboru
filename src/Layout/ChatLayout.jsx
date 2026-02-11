@@ -7,6 +7,7 @@ import Error from '../Utils/Error'
 import { Navigate, Outlet, NavLink } from 'react-router'
 import { supabase } from '../supabase/supabase-client'
 import { parseDateRangeAtMidnight } from '../misc/handleDate'
+import UnreadMessage from '../Component/UnreadMessage'
 
 export default function ChatLayout() {
 
@@ -38,6 +39,7 @@ export default function ChatLayout() {
                 `)
                 .eq('has_chatroom', true)
                 .or(`seller_id.eq.${currentUser?.id}, buyer_id.eq.${currentUser?.id}`)
+                .order('latest_chat', {ascending: false})
             if (error) {
                 throw error
             }
@@ -94,6 +96,7 @@ export default function ChatLayout() {
                     >
                         <div className='chat-sidebar-img-div'>
                             <img src={data.paddle.img} />
+                            <UnreadMessage order={data} />
                         </div>
                         <div className='chat-sidebar-child-right'>
                             <span className='chat-sidebar-child-seller'>{chatRoomType}</span>

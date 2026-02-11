@@ -4,6 +4,7 @@ import { NavLink } from 'react-router'
 import { useAuth } from '../Auth/AuthProvider'
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaRegMessage } from "react-icons/fa6";
+import UnreadMessage from '../Component/UnreadMessage';
 
 export default function Header() {
 
@@ -56,6 +57,7 @@ export default function Header() {
                         className={({ isActive }) => isActive ? "msg-icon active-nav-btn" : "msg-icon"}
                     >
                         <FaRegMessage />
+                        <UnreadMessage />
                     </NavLink>
                 }
 

@@ -49,6 +49,7 @@ header{
     align-self: center;
     font-size: 1.2rem;
     cursor: pointer;
+    position: relative;
 }
 
 .user-icon:hover,

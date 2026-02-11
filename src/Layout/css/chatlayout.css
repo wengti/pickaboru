@@ -28,6 +28,7 @@
 }
 
 .chat-sidebar-img-div{
+    position: relative;
     height: 60px;
     aspect-ratio: 1 / 1;
     margin: auto auto;

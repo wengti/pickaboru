@@ -5,11 +5,11 @@ import AuthProvider from './Auth/AuthProvider.jsx'
 import CurrentUserProvider from './Auth/CurrentUserProvider.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <AuthProvider>
-        <CurrentUserProvider>
-            <App />
-        </CurrentUserProvider>
-    </AuthProvider>
-  </StrictMode>,
+    <StrictMode>
+        <AuthProvider>
+            <CurrentUserProvider>
+                <App />
+            </CurrentUserProvider>
+        </AuthProvider>
+    </StrictMode>,
 )

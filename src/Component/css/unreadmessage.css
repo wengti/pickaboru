@@ -1,0 +1,23 @@
+
+.red-circle {
+    position: absolute;
+    top: 0;
+    right: -10px;
+    background-color: #ff3333;
+    color: whitesmoke;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-circle {
+    top: -25%;
+    right: -50%;
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+}

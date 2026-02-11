@@ -70,6 +70,11 @@ export default function ChatRoom() {
 
     async function sendMessage(formData) {
         try {
+
+            if(formData.get('chat-message') === ''){
+                return
+            }
+            
             const { error } = await supabase
                 .from('messages')
                 .insert({
@@ -79,6 +84,24 @@ export default function ChatRoom() {
                     is_read: false,
                     message: formData.get('chat-message')
                 })
+        }
+        catch (error) {
+            setError(error)
+        }
+    }
+
+    async function readMessage() {
+        try {
+            const { error } = await supabase
+                .from('messages')
+                .update({ is_read: true })
+                .eq('order_id', orderId)
+                .eq('is_read', false)
+                .eq('receiver_id', currentUser.id)
+
+            if (error) {
+                throw error
+            }
         }
         catch (error) {
             setError(error)
@@ -97,11 +120,6 @@ export default function ChatRoom() {
         async function subscribeToMessages() {
             await supabase.realtime.setAuth()
 
-            if (channel.current !== null) {
-                supabase.removeChannel(channel.current)
-                channel.current === null
-            }
-
             channel.current = supabase
                 .channel(
                     `topic:${orderId}`,
@@ -111,23 +129,32 @@ export default function ChatRoom() {
                 )
                 .on(
                     'broadcast',
-                    { event: 'INSERT' },
-                    (payload) => setChatData((prevChat) => { return [...prevChat, payload.payload.record] })
+                    { event: '*' },
+                    (payload) => fetchChatData()
                 )
                 .subscribe((status) => {
-                    console.log('Channel Status: ', status)
+                    console.log(`[ChatRoom] Status of Channel ${orderId}: `, status)
                 })
         }
 
         subscribeToMessages()
 
-        
+
+        return () => {
+
+            if (channel.current) {
+                channel.current.unsubscribe()
+                channel.current = null
+            }
+        }
+
     }, [orderId])
 
     useEffect(() => {
-        // scroll To the bottom
+
         if (chatBox.current) {
-            chatBox.current.scrollTop = chatBox.current.scrollHeight
+            chatBox.current.scrollTop = chatBox.current.scrollHeight // scroll To the bottom 
+            readMessage() // and set messages to be read
         }
     }, [chatData])
 
@@ -145,7 +172,7 @@ export default function ChatRoom() {
 
         if (currentUser.id !== orderData[0].seller.id && currentUser.id !== orderData[0].buyer.id) {
             return <Navigate to="/user/orders" />
-        } else if (!orderData[0].has_chatroom){
+        } else if (!orderData[0].has_chatroom) {
             return <Navigate to="/user/orders" />
         }
 
@@ -161,11 +188,17 @@ export default function ChatRoom() {
                 messageAlign = 'left'
             }
 
+            
+
             return (
                 <div className={'message-box ' + messageSentBy} key={data.id}>
                     <span>{data.message}</span>
                     <span className={'message-date ' + messageAlign}>
                         {new Date(data.created_at).toISOString().split("T")[0]} {new Date(data.created_at).toLocaleTimeString()}
+                        {
+                            messageSentBy === 'sender' &&
+                            <i className={"fa-solid fa-check-double " + (data.is_read && "is_read")}></i>
+                        }
                     </span>
                     {
                         messageSentBy === 'sender' ?
@@ -200,7 +233,7 @@ export default function ChatRoom() {
                             className='message-area'
                         >
                         </textarea>
-                        <button className='send-btn'>
+                        <button className='send-btn' type='submit'>
                             <IoSend className='send-icon' />
                         </button>
                     </div>
