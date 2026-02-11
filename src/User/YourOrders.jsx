@@ -10,6 +10,7 @@ import Error from '../Utils/Error'
 import { FaEye } from "react-icons/fa"
 import { IoChatboxEllipses } from "react-icons/io5";
 import ReviewForm from './ReviewForm'
+import handleImgError from '../misc/handleImgError'
 
 export default function YourOrders() {
 

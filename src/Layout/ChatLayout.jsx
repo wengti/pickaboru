@@ -8,6 +8,7 @@ import { Navigate, Outlet, NavLink } from 'react-router'
 import { supabase } from '../supabase/supabase-client'
 import { parseDateRangeAtMidnight } from '../misc/handleDate'
 import UnreadMessage from '../Component/UnreadMessage'
+import handleImgError from '../misc/handleImgError'
 
 export default function ChatLayout() {
 
@@ -95,7 +96,7 @@ export default function ChatLayout() {
                         className={({ isActive }) => isActive ? 'active-chat chat-sidebar-child' : 'chat-sidebar-child'}
                     >
                         <div className='chat-sidebar-img-div'>
-                            <img src={data.paddle.img} />
+                            <img src={data.paddle.img} onError={(event) => handleImgError(event)}/>
                             <UnreadMessage order={data} />
                         </div>
                         <div className='chat-sidebar-child-right'>

@@ -2,6 +2,7 @@ import { NavLink } from 'react-router'
 import { GoStar, GoStarFill } from "react-icons/go";
 import "./css/dashboardcommentbox.css"
 import { heartDisplay } from '../misc/starDisplay';
+import handleImgError from '../misc/handleImgError'
 
 export default function DashboardCommentBox({ reviewObj, title }) {
     const { items: paddle, reviews, buyer_data } = reviewObj
@@ -11,7 +12,7 @@ export default function DashboardCommentBox({ reviewObj, title }) {
             <span className='summary-comment-title'>{title}</span>
             <div className='summary-comment-content'>
                 <div className='summary-comment-img'>
-                    <img src={paddle.img} />
+                    <img src={paddle.img} onError={(event) => handleImgError(event)}/>
                 </div>
                 <div className='summary-comment-main'>
                     <div className='summary-comment-rating'>
