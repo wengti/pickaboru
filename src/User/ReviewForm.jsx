@@ -17,7 +17,7 @@ export default function ReviewForm({ paddle, order }) {
     const [isFormSubmitted, setIsFormSubmitted] = useState(false)
 
     // currentUser
-    const {currentUser} = useCurrentUser()
+    const { currentUser } = useCurrentUser()
 
     // Color for rating group
     const StyledRating = styled(Rating)({
@@ -49,7 +49,15 @@ export default function ReviewForm({ paddle, order }) {
             return
         }
 
-        const {error} = await supabase
+        console.log({
+            paddle_id: paddle.id,
+            reviewer_id: currentUser?.id,
+            comment: reviewText,
+            rating: reviewVal,
+            order_id: order.id
+        })
+
+        const { error } = await supabase
             .from('reviews')
             .insert({
                 paddle_id: paddle.id,
@@ -58,8 +66,8 @@ export default function ReviewForm({ paddle, order }) {
                 rating: reviewVal,
                 order_id: order.id
             })
-        
-        if(error){
+
+        if (error) {
             throw error
         }
 
@@ -70,44 +78,44 @@ export default function ReviewForm({ paddle, order }) {
 
     return (
         isFormSubmitted ?
-        <span>Review submitted! Thank you / ありがとうございます!</span>:
-        <div className='feedback-form'>
-            <div style={{ display: 'flex', gap: '0.5em' }}>
-                <label className='feedback-title'>
-                    Rate & Review:
-                    <Box sx={boxStyles}>
-                        <StyledRating
-                            name="hover-feedback"
-                            value={reviewVal}
-                            onChange={(_event, newValue) => {
-                                setReviewVal(newValue);
-                            }}
-                            icon={<FavoriteIcon fontSize="inherit" />}
-                            emptyIcon={<FavoriteBorderIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                        />
-                    </Box>
-                </label>
+            <span>Review submitted! Thank you / ありがとうございます!</span> :
+            <div className='feedback-form'>
+                <div style={{ display: 'flex', gap: '0.5em' }}>
+                    <label className='feedback-title'>
+                        Rate & Review:
+                        <Box sx={boxStyles}>
+                            <StyledRating
+                                name="hover-feedback"
+                                value={reviewVal}
+                                onChange={(_event, newValue) => {
+                                    setReviewVal(newValue);
+                                }}
+                                icon={<FavoriteIcon fontSize="inherit" />}
+                                emptyIcon={<FavoriteBorderIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                            />
+                        </Box>
+                    </label>
 
-            </div>
-            <div className='feedback-div'>
-                <textarea
-                    maxLength="100"
-                    placeholder="i.e. I love the experience..."
-                    onChange={(event) => { setReviewText(event.target.value) }}
-                    value = {reviewText}
-                >
-                </textarea>
-                <div className='feedback-btn-div'>
-                    <button className='feedback-list-btn expanded' onClick={() => { handleReview() }}>Add</button>
                 </div>
-            </div>
+                <div className='feedback-div'>
+                    <textarea
+                        maxLength="100"
+                        placeholder="i.e. I love the experience..."
+                        onChange={(event) => { setReviewText(event.target.value) }}
+                        value={reviewText}
+                    >
+                    </textarea>
+                    <div className='feedback-btn-div'>
+                        <button className='feedback-list-btn expanded' onClick={() => { handleReview() }}>Add</button>
+                    </div>
+                </div>
 
-            {
-                error &&
-                <span className='feedback-error'>
-                    {error.name}: {error.message}
-                </span>
-            }
-        </div>
+                {
+                    error &&
+                    <span className='feedback-error'>
+                        {error.name}: {error.message}
+                    </span>
+                }
+            </div>
     )
 }
